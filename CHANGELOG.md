@@ -8,6 +8,10 @@
 
 - Updated the character classes and subclasses fields to be pointers for consistency
 
+### [Fixed]
+
+- Fixed factory error handling
+
 ## v0.1.1 04/11/26
 
 ### [Added]

@@ -2,7 +2,6 @@ package factories
 
 import (
 	"dnd-character-dashboard/db/models"
-	"dnd-character-dashboard/pkg/logging"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/gommon/random"
 )
@@ -11,7 +10,7 @@ func NewClass(db *gorm.DB, class *models.Class) {
 	fillClassDefaults(class)
 	err := db.Create(class).Error
 	if err != nil {
-		logging.Logger.LogWarn().Msg("Error creating class in factory: "+err.Error())
+		panic("error creating class in factory: " + err.Error())
 	}
 }
 
