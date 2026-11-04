@@ -2,7 +2,6 @@ package factories
 
 import (
 	"dnd-character-dashboard/db/models"
-	"dnd-character-dashboard/pkg/logging"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/gommon/random"
 )
@@ -11,7 +10,7 @@ func NewSubclass(db *gorm.DB, subclass *models.Subclass) {
 	fillSubclassDefaults(subclass)
 	err := db.Create(subclass).Error
 	if err != nil {
-		logging.Logger.LogWarn().Msg("Error creating subclass in factory: " + err.Error())
+		panic("error creating subclass in factory: " + err.Error())
 	}
 }
 

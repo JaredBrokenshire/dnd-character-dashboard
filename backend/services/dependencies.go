@@ -18,6 +18,7 @@ type Dependencies struct {
 	userService      UserServiceInterface
 	characterService CharacterServiceInterface
 	campaignService  CampaignServiceInterface
+	classService     ClassServiceInterface
 }
 
 func NewDependencies(db *gorm.DB, repos *repositories.Repos) *Dependencies {
@@ -87,4 +88,16 @@ func (d *Dependencies) GetCampaignService() CampaignServiceInterface {
 
 func (d *Dependencies) SetCampaignService(campaignService CampaignServiceInterface) {
 	d.campaignService = campaignService
+}
+
+func (d *Dependencies) GetClassService() ClassServiceInterface {
+	if d.classService == nil {
+		d.classService = NewClassService(d.repos.Class)
+	}
+
+	return d.classService
+}
+
+func (d *Dependencies) SetClassService(classService ClassServiceInterface) {
+	d.classService = classService
 }

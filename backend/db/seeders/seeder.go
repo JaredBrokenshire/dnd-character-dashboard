@@ -23,6 +23,7 @@ func (s *Seeder) Seed() {
 	s.SetClasses()
 	s.SetSubclasses()
 	s.SetClassLogos()
+	s.SetClassCardBackgrounds()
 	s.SetCampaigns()
 	s.SetCharacters()
 	s.SetCharacterProfilePictures()

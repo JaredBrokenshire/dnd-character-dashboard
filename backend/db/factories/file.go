@@ -2,7 +2,6 @@ package factories
 
 import (
 	"dnd-character-dashboard/db/models"
-	"dnd-character-dashboard/pkg/logging"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/gommon/random"
@@ -12,7 +11,7 @@ func NewFile(db *gorm.DB, file *models.File) {
 	setFileDefaults(file)
 	err := db.Create(file).Error
 	if err != nil {
-		logging.Logger.LogWarn().Msg("Error creating file in factory: " + err.Error())
+		panic("error creating file in factory: " + err.Error())
 	}
 }
 

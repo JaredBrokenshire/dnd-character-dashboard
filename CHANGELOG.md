@@ -1,3 +1,21 @@
+## v0.1.2 `DATE`
+
+### [Added]
+
+- Added classes list endpoint with new handler, service and repo
+- Added class card background images with seeded assets
+- Added class descriptive fields, tagline, description, primary ability, saves, and hit point die value
+- Added ability score enum to the models package
+- Added class list frontend page with debounced search bar and routed cards 
+
+### [Changed]
+
+- Updated the character classes and subclasses fields to be pointers for consistency
+
+### [Fixed]
+
+- Fixed factory error handling
+
 ## v0.1.1 04/11/26
 
 ### [Added]

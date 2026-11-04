@@ -59,8 +59,8 @@ func TestCharacter_List(t *testing.T) {
 		Name:                 "AAA",
 		CampaignID:           campaign.ID,
 		RaceID:               race.ID,
-		Classes:              []models.Class{*class},
-		Subclasses:           []models.Subclass{*subclass},
+		Classes:              []*models.Class{class},
+		Subclasses:           []*models.Subclass{subclass},
 		ProfilePictureFileID: profilePicture.ID,
 	}
 	factories.NewCharacter(ts.S.Db, character)
@@ -68,8 +68,8 @@ func TestCharacter_List(t *testing.T) {
 		Name:                 "BBB",
 		CampaignID:           campaign2.ID,
 		RaceID:               race2.ID,
-		Classes:              []models.Class{*class2},
-		Subclasses:           []models.Subclass{*subclass2},
+		Classes:              []*models.Class{class2},
+		Subclasses:           []*models.Subclass{subclass2},
 		ProfilePictureFileID: profilePicture2.ID,
 	}
 	factories.NewCharacter(ts.S.Db, character2)
@@ -266,8 +266,8 @@ func TestCharacter_Get(t *testing.T) {
 	character := &models.Character{
 		CampaignID:           campaign.ID,
 		RaceID:               race.ID,
-		Classes:              []models.Class{*class},
-		Subclasses:           []models.Subclass{*subclass},
+		Classes:              []*models.Class{class},
+		Subclasses:           []*models.Subclass{subclass},
 		ProfilePictureFileID: profilePicture.ID,
 	}
 	factories.NewCharacter(ts.S.Db, character)
