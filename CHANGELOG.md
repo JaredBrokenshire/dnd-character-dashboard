@@ -6,6 +6,7 @@
 - Added class card background images with seeded assets
 - Added class descriptive fields, tagline, description, primary ability, saves, and hit point die value
 - Added ability score enum to the models package
+- Added class list frontend page with debounced search bar and routed cards 
 
 ### [Changed]
 
