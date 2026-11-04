@@ -7,5 +7,8 @@ type Class struct {
 	LogoFileID uint
 	Logo       *File `gorm:"foreignkey:LogoFileID"`
 
+	CardBackgroundFileID uint
+	CardBackground       *File `gorm:"foreignkey:CardBackgroundFileID"`
+
 	Subclasses []Subclass
 }

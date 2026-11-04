@@ -3,6 +3,7 @@
 ### [Added]
 
 - Added classes list endpoint with new handler, service and repo
+- Added class card background images with seeded assets
 
 ### [Changed]
 

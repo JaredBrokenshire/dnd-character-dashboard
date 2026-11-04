@@ -7,9 +7,10 @@ type ClassResponse struct {
 }
 
 type SlimClassResponse struct {
-	ID   uint         `json:"id"`
-	Name string       `json:"name"`
-	Logo FileResponse `json:"logo"`
+	ID             uint         `json:"id"`
+	Name           string       `json:"name"`
+	Logo           FileResponse `json:"logo"`
+	CardBackground FileResponse `json:"card_background"`
 }
 
 type PaginatedClassResponse struct {
@@ -25,6 +26,10 @@ func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
 
 	if class.Logo != nil {
 		res.Logo = *NewFileResponse(class.Logo)
+	}
+
+	if class.CardBackground != nil {
+		res.CardBackground = *NewFileResponse(class.CardBackground)
 	}
 
 	return res

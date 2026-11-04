@@ -14,10 +14,17 @@ func TestClass_List(t *testing.T) {
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
-	logo := &models.File{Name: "logo.png"}
+	logo := &models.File{}
 	factories.NewFile(ts.S.Db, logo)
 
-	class := &models.Class{Name: "AAA", LogoFileID: logo.ID}
+	cardBackground := &models.File{}
+	factories.NewFile(ts.S.Db, cardBackground)
+
+	class := &models.Class{
+		Name:                 "AAA",
+		LogoFileID:           logo.ID,
+		CardBackgroundFileID: cardBackground.ID,
+	}
 	factories.NewClass(ts.S.Db, class)
 	class2 := &models.Class{Name: "BBB"}
 	factories.NewClass(ts.S.Db, class2)
@@ -48,6 +55,9 @@ func TestClass_List(t *testing.T) {
 					fmt.Sprintf(`"location":"%v"`, logo.Location),
 					fmt.Sprintf(`"name":"%v"`, logo.Name),
 
+					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
+					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
+
 					`"total_count":3`,
 				},
 			},
@@ -62,6 +72,9 @@ func TestClass_List(t *testing.T) {
 
 					fmt.Sprintf(`"location":"%v"`, logo.Location),
 					fmt.Sprintf(`"name":"%v"`, logo.Name),
+
+					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
+					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 
 					`"total_count":3`,
 				},
@@ -87,6 +100,9 @@ func TestClass_List(t *testing.T) {
 
 					fmt.Sprintf(`"location":"%v"`, logo.Location),
 					fmt.Sprintf(`"name":"%v"`, logo.Name),
+
+					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
+					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 				},
 			},
 		},
@@ -106,6 +122,9 @@ func TestClass_List(t *testing.T) {
 
 					fmt.Sprintf(`"location":"%v"`, logo.Location),
 					fmt.Sprintf(`"name":"%v"`, logo.Name),
+
+					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
+					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 				},
 			},
 		},

@@ -25,6 +25,7 @@ func (r *ClassRepository) GetClasses(c echo.Context, scopes []func(db *gorm.DB) 
 
 	r.Db.
 		Preload("Logo").
+		Preload("CardBackground").
 		Preload("Subclasses").
 		Scopes(paginateFunc).
 		Scopes(scopes...).
