@@ -67,7 +67,7 @@ func (s *Seeder) SetClassCardBackgrounds() {
 			continue
 		}
 
-		if err := s.DB.Model(&class).Update("card_background_id", file.ID).Error; err != nil {
+		if err := s.DB.Model(&class).Update("card_background_file_id", file.ID).Error; err != nil {
 			logging.Logger.LogWarn().Msg(fmt.Sprintf("Seeder: error updating card_background_id for class %q: %v", class.Name, err.Error()))
 		}
 	}

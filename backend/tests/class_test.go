@@ -58,6 +58,13 @@ func TestClass_List(t *testing.T) {
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 
+					fmt.Sprintf(`"tagline":"%v"`, class.Tagline),
+					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),
+					fmt.Sprintf(`"primary_ability":"%v"`, class.PrimaryAbility),
+					fmt.Sprintf(`"hit_point_die_valie":%v`, class.HitPointDieValue),
+					fmt.Sprintf(`"save":"%v"`, class.Save),
+					fmt.Sprintf(`"secondary_save":"%v"`, class.SecondarySave),
+
 					`"total_count":3`,
 				},
 			},

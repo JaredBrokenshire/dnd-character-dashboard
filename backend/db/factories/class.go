@@ -18,4 +18,22 @@ func fillClassDefaults(class *models.Class) {
 	if class.Name == "" {
 		class.Name = random.String(16)
 	}
+	if class.Tagline == "" {
+		class.Tagline = random.String(16)
+	}
+	if class.CardDescription == "" {
+		class.CardDescription = random.String(16)
+	}
+	if class.PrimaryAbility == "" {
+		class.PrimaryAbility = random.String(16)
+	}
+	if class.HitPointDieValue == 0 {
+		class.HitPointDieValue = 10
+	}
+	if class.Save == "" {
+		class.Save = models.Strength
+	}
+	if class.SecondarySave == "" {
+		class.SecondarySave = models.Dexterity
+	}
 }

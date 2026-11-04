@@ -4,6 +4,8 @@
 
 - Added classes list endpoint with new handler, service and repo
 - Added class card background images with seeded assets
+- Added class descriptive fields, tagline, description, primary ability, saves, and hit point die value
+- Added ability score enum to the models package
 
 ### [Changed]
 

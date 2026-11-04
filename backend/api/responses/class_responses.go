@@ -7,10 +7,18 @@ type ClassResponse struct {
 }
 
 type SlimClassResponse struct {
-	ID             uint         `json:"id"`
-	Name           string       `json:"name"`
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
+
 	Logo           FileResponse `json:"logo"`
 	CardBackground FileResponse `json:"card_background"`
+
+	Tagline          string         `json:"tagline"`
+	CardDescription  string         `json:"card_description"`
+	PrimaryAbility   string         `json:"primary_ability"`
+	HitPointDieValue int            `json:"hit_point_die_value"`
+	Save             models.Ability `json:"save"`
+	SecondarySave    models.Ability `json:"secondary_save"`
 }
 
 type PaginatedClassResponse struct {
