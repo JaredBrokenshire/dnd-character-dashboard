@@ -28,8 +28,14 @@ type PaginatedClassResponse struct {
 
 func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
 	res := &SlimClassResponse{
-		ID:   class.ID,
-		Name: class.Name,
+		ID:               class.ID,
+		Name:             class.Name,
+		Tagline:          class.Tagline,
+		CardDescription:  class.CardDescription,
+		PrimaryAbility:   class.PrimaryAbility,
+		HitPointDieValue: class.HitPointDieValue,
+		Save:             class.Save,
+		SecondarySave:    class.SecondarySave,
 	}
 
 	if class.Logo != nil {
