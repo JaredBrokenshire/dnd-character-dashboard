@@ -11,8 +11,8 @@ type Character struct {
 	RaceID uint
 	Race   *Race
 
-	Classes    []Class    `gorm:"many2many:character_classes;"`
-	Subclasses []Subclass `gorm:"many2many:character_subclasses;"`
+	Classes    []*Class    `gorm:"many2many:character_classes;"`
+	Subclasses []*Subclass `gorm:"many2many:character_subclasses;"`
 
 	CampaignID uint
 	Campaign   *Campaign

@@ -1,3 +1,13 @@
+## v0.1.2 `DATE`
+
+### [Added]
+
+- Added classes list endpoint with new handler, service and repo
+
+### [Changed]
+
+- Updated the character classes and subclasses fields to be pointers for consistency
+
 ## v0.1.1 04/11/26
 
 ### [Added]

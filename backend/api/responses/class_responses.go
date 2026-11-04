@@ -2,10 +2,19 @@ package responses
 
 import "dnd-character-dashboard/db/models"
 
+type ClassResponse struct {
+	*SlimClassResponse
+}
+
 type SlimClassResponse struct {
 	ID   uint         `json:"id"`
 	Name string       `json:"name"`
 	Logo FileResponse `json:"logo"`
+}
+
+type PaginatedClassResponse struct {
+	Data []SlimClassResponse `json:"data"`
+	Meta ResponseMeta        `json:"meta"`
 }
 
 func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
@@ -21,10 +30,21 @@ func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
 	return res
 }
 
-func NewClassResponses(classes []models.Class) []SlimClassResponse {
+func NewClassResponses(classes []*models.Class) []SlimClassResponse {
 	var res []SlimClassResponse
 	for _, class := range classes {
-		res = append(res, *NewSlimClassResponse(&class))
+		res = append(res, *NewSlimClassResponse(class))
 	}
 	return res
+}
+
+func NewPaginatedClassResponse(classes []*models.Class, count, page, pageSize int) *PaginatedClassResponse {
+	return &PaginatedClassResponse{
+		Data: NewClassResponses(classes),
+		Meta: ResponseMeta{
+			TotalCount: count,
+			Page:       page,
+			PageSize:   pageSize,
+		},
+	}
 }

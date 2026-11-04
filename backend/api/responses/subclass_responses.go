@@ -16,10 +16,10 @@ func NewSlimSubclassResponse(subclass *models.Subclass) *SlimSubclassResponse {
 	}
 }
 
-func NewSubclassResponses(subclasses []models.Subclass) []SlimSubclassResponse {
+func NewSubclassResponses(subclasses []*models.Subclass) []SlimSubclassResponse {
 	var res []SlimSubclassResponse
 	for _, subclass := range subclasses {
-		res = append(res, *NewSlimSubclassResponse(&subclass))
+		res = append(res, *NewSlimSubclassResponse(subclass))
 	}
 	return res
 }
