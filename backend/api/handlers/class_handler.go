@@ -40,7 +40,7 @@ func (h *ClassHandler) List(c echo.Context) error {
 		})
 	}
 
-	classes, page, pageSize := h.server.Dependencies.GetClassService().GetClasses(c, scopes)
+	classes, page, pageSize := h.server.Dependencies.GetClassService().List(c, scopes)
 	count := h.server.Dependencies.GetClassService().Count(scopes)
 
 	res := responses.NewPaginatedClassResponse(classes, count, page, pageSize)

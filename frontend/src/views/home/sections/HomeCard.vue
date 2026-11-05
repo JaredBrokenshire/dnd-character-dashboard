@@ -29,7 +29,7 @@
             <img
               :alt="`${$props.title} Image`"
               :src="$props.imagePath"
-              class="min-w-[50%] min-h-[50%] max-w-full max-h-full xs:max-w-[150%] xs:max-h-[150%] lg:max-w-[200%] lg:max-h-[200%] aspect-square object-cover absolute -top-[2rem] xs:-top-[3rem] sm:-top-[4rem] md:-top-[5rem] transition-all group-hover:scale-110"
+              class="min-w-[50%] min-h-[50%] max-w-full max-h-full xs:max-w-[150%] xs:max-h-[150%] lg:max-w-[200%] lg:max-h-[200%] aspect-square object-contain absolute -top-[2rem] xs:-top-[3rem] sm:-top-[4rem] md:-top-[5rem] transition-all group-hover:scale-110"
             >
           </div>
         </div>

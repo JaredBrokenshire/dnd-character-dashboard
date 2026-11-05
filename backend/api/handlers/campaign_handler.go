@@ -42,7 +42,7 @@ func (h *CampaignHandler) List(c echo.Context) error {
 		})
 	}
 
-	campaigns, page, pageSize := h.server.Dependencies.GetCampaignService().GetCampaigns(c, userID, scopes)
+	campaigns, page, pageSize := h.server.Dependencies.GetCampaignService().List(c, userID, scopes)
 	count := h.server.Dependencies.GetCampaignService().Count(userID, scopes)
 
 	res := responses.NewPaginatedCampaignResponse(campaigns, count, page, pageSize)

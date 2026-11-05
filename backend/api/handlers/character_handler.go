@@ -45,7 +45,7 @@ func (h *CharacterHandler) List(c echo.Context) error {
 		})
 	}
 
-	characters, page, pageSize := h.server.Dependencies.GetCharacterService().GetCharacters(c, userID, scopes)
+	characters, page, pageSize := h.server.Dependencies.GetCharacterService().List(c, userID, scopes)
 	count := h.server.Dependencies.GetCharacterService().Count(userID, scopes)
 
 	res := responses.NewPaginatedCharacterResponse(characters, count, page, pageSize)
@@ -67,7 +67,7 @@ func (h *CharacterHandler) Get(c echo.Context) error {
 	userID := c.Get("userID").(uint)
 	id := c.Param("id")
 
-	character, err := h.server.Dependencies.GetCharacterService().GetCharacterByID(userID, id)
+	character, err := h.server.Dependencies.GetCharacterService().Get(userID, id)
 	switch {
 	case errors.Is(err, services.ErrCharacterNotFound):
 		logging.Logger.LogWarn().Msg("character/get character not found" + err.Error())

@@ -7,38 +7,38 @@ import (
 )
 
 type MockCharacterService struct {
-	GetCharactersCalls []struct {
+	ListCalls []struct {
 		UserID interface{}
 		scopes []func(db *gorm.DB) *gorm.DB
 	}
 
 	CountCalls []int
 
-	GetCharacterByIDCalls []struct {
+	GetCalls []struct {
 		UserID interface{}
 		ID     interface{}
 	}
-	GetCharacterByIdError error
+	GetError error
 }
 
 func NewMockCharacterService() *MockCharacterService {
 	return &MockCharacterService{
-		GetCharactersCalls: []struct {
+		ListCalls: []struct {
 			UserID interface{}
 			scopes []func(db *gorm.DB) *gorm.DB
 		}{},
 		CountCalls: []int{},
 
-		GetCharacterByIDCalls: []struct {
+		GetCalls: []struct {
 			UserID interface{}
 			ID     interface{}
 		}{},
-		GetCharacterByIdError: nil,
+		GetError: nil,
 	}
 }
 
-func (m *MockCharacterService) GetCharacters(_ echo.Context, userID interface{}, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Character, int, int) {
-	m.GetCharactersCalls = append(m.GetCharactersCalls, struct {
+func (m *MockCharacterService) List(_ echo.Context, userID interface{}, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Character, int, int) {
+	m.ListCalls = append(m.ListCalls, struct {
 		UserID interface{}
 		scopes []func(db *gorm.DB) *gorm.DB
 	}{
@@ -53,8 +53,8 @@ func (m *MockCharacterService) Count(_ interface{}, _ []func(db *gorm.DB) *gorm.
 	return 0
 }
 
-func (m *MockCharacterService) GetCharacterByID(userId, id interface{}) (*models.Character, error) {
-	m.GetCharacterByIDCalls = append(
+func (m *MockCharacterService) Get(userId, id interface{}) (*models.Character, error) {
+	m.GetCalls = append(
 		[]struct {
 			UserID interface{}
 			ID     interface{}
@@ -66,19 +66,19 @@ func (m *MockCharacterService) GetCharacterByID(userId, id interface{}) (*models
 		},
 	)
 
-	return nil, m.GetCharacterByIdError
+	return nil, m.GetError
 }
 
 func (m *MockCharacterService) Reset() {
-	m.GetCharactersCalls = []struct {
+	m.ListCalls = []struct {
 		UserID interface{}
 		scopes []func(db *gorm.DB) *gorm.DB
 	}{}
 	m.CountCalls = []int{}
 
-	m.GetCharacterByIDCalls = []struct {
+	m.GetCalls = []struct {
 		UserID interface{}
 		ID     interface{}
 	}{}
-	m.GetCharacterByIdError = nil
+	m.GetError = nil
 }

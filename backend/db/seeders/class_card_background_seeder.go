@@ -36,7 +36,7 @@ func (s *Seeder) SetClassCardBackgrounds() {
 	}
 
 	for _, class := range classes {
-		// Skip if this class already has a logo.
+		// Skip if this class already has a card background file.
 		if class.CardBackgroundFileID != 0 {
 			continue
 		}

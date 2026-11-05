@@ -8,7 +8,7 @@ import (
 )
 
 type ClassServiceInterface interface {
-	GetClasses(c echo.Context, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Class, int, int)
+	List(c echo.Context, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Class, int, int)
 	Count(scopes []func(db *gorm.DB) *gorm.DB) int
 }
 
@@ -20,7 +20,7 @@ func NewClassService(repo *repositories.ClassRepository) *ClassService {
 	return &ClassService{classRepo: repo}
 }
 
-func (s *ClassService) GetClasses(c echo.Context, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Class, int, int) {
+func (s *ClassService) List(c echo.Context, scopes []func(db *gorm.DB) *gorm.DB) ([]*models.Class, int, int) {
 	return s.classRepo.GetClasses(c, scopes)
 }
 

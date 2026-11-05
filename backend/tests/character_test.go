@@ -317,7 +317,7 @@ func TestCharacter_Get(t *testing.T) {
 			Name: "Can't get character if there is an error from the character service",
 			Setup: func(test *helpers.TestCase) {
 				mockCharacterService := mocks.NewMockCharacterService()
-				mockCharacterService.GetCharacterByIdError = errors.New("test error")
+				mockCharacterService.GetError = errors.New("test error")
 
 				ts.S.Dependencies.SetCharacterService(mockCharacterService)
 			},

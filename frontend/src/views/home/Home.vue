@@ -15,6 +15,7 @@
 
 <script>
   import HomeCard from "@/views/home/sections/HomeCard.vue";
+  import RacesImage from "@/assets/images/pages/home/races.png"
   import ClassesImage from "@/assets/images/pages/home/classes.png"
   import CampaignsImage from "@/assets/images/pages/home/campaigns.png"
   import CharactersImage from "@/assets/images/pages/home/characters.png"
@@ -42,6 +43,12 @@
             bodyText: "Choose from a wide range of classes, each provides a character’s most exciting capabilities",
             route: "/classes",
             imagePath: ClassesImage,
+          },
+          {
+            title: "Races",
+            bodyText: "Become a member of a fantastical species, and use their unique abilities",
+            route: "/races",
+            imagePath: RacesImage,
           }
         ]
       }

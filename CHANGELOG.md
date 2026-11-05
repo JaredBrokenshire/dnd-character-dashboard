@@ -1,4 +1,13 @@
-## v0.1.2 `DATE`
+## v0.1.3 05/11/2026
+
+### Added
+
+- Added races list endpoint with new handler, service and repo
+- Added race card background images with seeded assets
+- Added race description
+- Added race list frontend page with debounced search bar and routed cards
+
+## v0.1.2 05/11/2026
 
 ### [Added]
 
