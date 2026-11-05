@@ -19,7 +19,9 @@ func NewSeeder(db *gorm.DB, fileStore file_storage.Store) *Seeder {
 func (s *Seeder) Seed() {
 	s.SetRoles()
 	s.SetUsers()
+	s.SetTraits()
 	s.SetRaces()
+	s.SetRaceCardBackgrounds()
 	s.SetClasses()
 	s.SetSubclasses()
 	s.SetClassLogos()

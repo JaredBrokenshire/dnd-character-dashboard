@@ -28,5 +28,8 @@ func List() []store.Migratable {
 		&list.UpdateCampaignsAddUserId{},
 		&list.UpdateClassesAddCardBackgroundFileId{},
 		&list.UpdateClassesAddDescriptions{},
+		&list.CreateTraitsTable{},
+		&list.CreateRaceTraitsTable{},
+		&list.UpdateRacesAddCardFields{},
 	}
 }

@@ -46,4 +46,5 @@ func RegisterRoutes(s *api.Server) {
 	characterRoutes(s)
 	campaignRoutes(s)
 	classRoutes(s)
+	raceRoutes(s)
 }
