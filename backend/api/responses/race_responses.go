@@ -12,6 +12,8 @@ type SlimRaceResponse struct {
 
 	CardBackground FileResponse `json:"card_background"`
 
+	CardDescription string `json:"card_description"`
+
 	Traits []SlimTraitResponse `json:"traits"`
 }
 
@@ -22,8 +24,9 @@ type PaginatedRaceResponse struct {
 
 func NewSlimRaceResponse(race *models.Race) *SlimRaceResponse {
 	res := &SlimRaceResponse{
-		ID:   race.ID,
-		Name: race.Name,
+		ID:              race.ID,
+		Name:            race.Name,
+		CardDescription: race.CardDescription,
 	}
 
 	if race.CardBackground != nil {

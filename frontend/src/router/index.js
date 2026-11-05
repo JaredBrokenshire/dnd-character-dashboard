@@ -2,6 +2,7 @@ import Vue from 'vue';
 import store from "@/store";
 import Router from 'vue-router';
 import authRoutes from '@/router/routes/auth';
+import raceRoutes from '@/router/routes/race';
 import classRoutes from "@/router/routes/class";
 import AuthService from "@/services/auth.service";
 import campaignRoutes from '@/router/routes/campaign'
@@ -26,6 +27,7 @@ const router = new Router({
     ...characterRoutes,
     ...campaignRoutes,
     ...classRoutes,
+    ...raceRoutes,
     {
       path: '/404',
       name: 'Error404',
