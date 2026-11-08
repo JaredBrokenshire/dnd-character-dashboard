@@ -1,3 +1,30 @@
+## V0.0.4 - Auth `DATE`
+
+### [Added]
+
+- Created `users`, `roles` and `user_roles` tables with migrations
+- Created user model and role model
+- Added response wrapper for endpoint responses
+- Added user, role and auth response objects
+- Added auth register request object
+- Added auth handler with register route, user and role repos
+- Added auth service with JWT middleware
+- Added auth register endpoint tests
+- Added login endpoint with new service method
+- Added refresh endpoint with new service method
+- Added me endpoint to return the current user
+- Added logout endpoint
+- Added seeder to set inital users and roles
+- Added frontend login/register pages with route protection
+- Added vee-validate for form validation and FeatherIcons
+- Added page layout with image background
+- Added 404 page
+- Added page header
+
+### [Changed]
+
+- Change github workflow to run on pr instead of push
+
 ## V0.0.3 - Server Logging 08/11/26
 
 ### [Added]
