@@ -23,4 +23,5 @@ func authRoutes(s *api.Server) {
 	protected.Use(mw.JWTAuth(os.Getenv("JWT_SECRET")))
 
 	protected.GET("/me", authHandler.Me)
+	protected.POST("/logout", authHandler.Logout)
 }

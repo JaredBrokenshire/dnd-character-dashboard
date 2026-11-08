@@ -7,13 +7,14 @@ import (
 	"dnd-character-dashboard/tests/mocks"
 	"errors"
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"testing"
 )
 
 func TestAuth_Register(t *testing.T) {
-	ts.ClearTable("users")
 	ts.SetupDefaultUsers()
 
 	request := helpers.Request{
@@ -140,7 +141,6 @@ func TestAuth_Register(t *testing.T) {
 }
 
 func TestAuth_Login(t *testing.T) {
-	ts.ClearTable("users")
 	ts.SetupDefaultUsers()
 
 	request := helpers.Request{
@@ -242,7 +242,6 @@ func TestAuth_Login(t *testing.T) {
 }
 
 func TestAuth_Refresh(t *testing.T) {
-	ts.ClearTable("users")
 	ts.SetupDefaultUsers()
 
 	request := helpers.Request{
@@ -364,9 +363,6 @@ func TestAuth_Refresh(t *testing.T) {
 }
 
 func TestAuth_Me(t *testing.T) {
-	ts.ClearTable("users")
-	ts.ClearTable("roles")
-	ts.ClearTable("user_roles")
 	ts.SetupDefaultUsers()
 
 	request := helpers.Request{
@@ -412,6 +408,46 @@ func TestAuth_Me(t *testing.T) {
 				},
 				BodyPartsMissing: []string{
 					helpers.AdminPassword,
+				},
+			},
+		},
+	}
+
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			RunAuthorisedTestCase(t, test)
+		})
+	}
+}
+
+func TestAuth_Logout(t *testing.T) {
+	ts.SetupDefaultUsers()
+
+	request := helpers.Request{
+		Method: http.MethodPost,
+		Url:    "/auth/logout",
+	}
+
+	RunNoAuthenticationTests(t, request.Method, request.Url)
+
+	cases := []helpers.TestCase{
+		{
+			Name:    "Can logout",
+			Request: request,
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusOK,
+				BodyPart:   "Logged out successfully",
+				ExpectedCallBack: func(res *httptest.ResponseRecorder) {
+					var foundCookie bool
+					for _, c := range res.Result().Cookies() {
+						if c.Name == "refresh_token" {
+							foundCookie = true
+							// Cookie should be cleared — value empty and MaxAge negative
+							assert.Equal(t, "", c.Value)
+							assert.Less(t, c.MaxAge, 0)
+						}
+					}
+					assert.True(t, foundCookie, "refresh_token cookie should be present in response")
 				},
 			},
 		},

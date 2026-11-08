@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 type AuthHandler struct {
@@ -181,6 +182,30 @@ func (h *AuthHandler) Me(c echo.Context) error {
 
 	res := responses.NewUserResponse(user)
 	return responses.Response(c, http.StatusOK, res)
+}
+
+// Logout godoc
+// @Summary Log User Out
+// @Description Set's the refresh cookie to an expired date and clears token.
+// @ID auth-logout
+// @Tags Auth Actions
+// @Accept json
+// @Produce json
+// @Success 200 {object} responses.Data
+// @Router /auth/logout [post]
+func (h *AuthHandler) Logout(c echo.Context) error {
+	cookie := &http.Cookie{
+		Name:     "refresh_token",
+		Value:    "",
+		Path:     "/",
+		HttpOnly: true,
+		Expires:  time.Unix(0, 0),
+		MaxAge:   -1,
+	}
+
+	c.SetCookie(cookie)
+
+	return responses.MessageResponse(c, http.StatusOK, "Logged out successfully")
 }
 
 func (h *AuthHandler) setRefreshCookie(c echo.Context, token string) {

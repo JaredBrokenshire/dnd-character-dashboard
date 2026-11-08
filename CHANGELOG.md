@@ -13,6 +13,7 @@
 - Added login endpoint with new service method
 - Added refresh endpoint with new service method
 - Added me endpoint to return the current user
+- Added logout endpoint
 
 ## V0.0.3 - Server Logging 08/11/26
 
