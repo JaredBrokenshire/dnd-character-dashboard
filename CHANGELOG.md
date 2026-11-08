@@ -1,4 +1,4 @@
-## V0.0.5 - Home Page `DATE`
+## V0.0.5 - Home Page 08/11/26
 
 ### [Changed]
 
