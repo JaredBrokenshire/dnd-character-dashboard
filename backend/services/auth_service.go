@@ -1,0 +1,142 @@
+package services
+
+import (
+	"dnd-character-dashboard/db/models"
+	"dnd-character-dashboard/db/repositories"
+	"dnd-character-dashboard/pkg/middleware"
+	"errors"
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
+	"strconv"
+	"time"
+)
+
+type AuthServiceInterface interface {
+	Register(dto RegisterRequestDTO) (*AuthResponse, string, error)
+	GenerateAccessToken(user *models.User) (string, error)
+	GenerateRefreshToken(user *models.User) (string, error)
+}
+
+type AuthResponse struct {
+	AccessToken string
+	User        *models.User
+}
+
+var (
+	ErrUsernameTaken    = errors.New("username already taken")
+	ErrEmailTaken       = errors.New("email already registered")
+	ErrPasswordNotMatch = errors.New("passwords do not match")
+)
+
+type AuthService struct {
+	db        *gorm.DB
+	userRepo  *repositories.UserRepository
+	roleRepo  *repositories.RoleRepository
+	jwtSecret []byte
+}
+
+func NewAuthService(db *gorm.DB, userRepo *repositories.UserRepository, roleRepo *repositories.RoleRepository, jwtSecret []byte) *AuthService {
+	return &AuthService{
+		db:        db,
+		userRepo:  userRepo,
+		roleRepo:  roleRepo,
+		jwtSecret: jwtSecret,
+	}
+}
+
+type RegisterRequestDTO struct {
+	Username        string
+	Email           string
+	Password        string
+	ConfirmPassword string
+}
+
+func (s *AuthService) Register(dto RegisterRequestDTO) (*AuthResponse, string, error) {
+	if dto.Password != dto.ConfirmPassword {
+		return nil, "", ErrPasswordNotMatch
+	}
+
+	existingUser := s.userRepo.GetByUsername(dto.Username)
+	if existingUser.ID != 0 {
+		return nil, "", ErrUsernameTaken
+	}
+
+	existingEmail := s.userRepo.GetByEmail(dto.Email)
+	if existingEmail.ID != 0 {
+		return nil, "", ErrEmailTaken
+	}
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return nil, "", err
+	}
+
+	role := s.roleRepo.GetByName(models.RoleUser)
+
+	user := &models.User{
+		Username: dto.Username,
+		Email:    dto.Email,
+		Password: string(passwordHash),
+		Roles:    []*models.Role{role},
+	}
+
+	err = s.userRepo.Create(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	accessToken, err := s.GenerateAccessToken(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	refreshToken, err := s.GenerateRefreshToken(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return &AuthResponse{
+		AccessToken: accessToken,
+		User:        user,
+	}, refreshToken, nil
+}
+
+func (s *AuthService) GenerateAccessToken(user *models.User) (string, error) {
+	claims := middleware.JWTClaims{
+		UserID: user.ID,
+
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:   "localdnd-api",
+			Subject:  strconv.FormatUint(uint64(user.ID), 10),
+			IssuedAt: jwt.NewNumericDate(time.Now()),
+			ExpiresAt: jwt.NewNumericDate(
+				time.Now().Add(15 * time.Minute),
+			),
+		},
+	}
+
+	token := jwt.NewWithClaims(
+		jwt.SigningMethodHS256,
+		claims,
+	)
+
+	return token.SignedString(s.jwtSecret)
+}
+
+func (s *AuthService) GenerateRefreshToken(user *models.User) (string, error) {
+	claims := jwt.MapClaims{
+		"sub":  strconv.FormatUint(uint64(user.ID), 10),
+		"type": "refresh",
+		"iat":  time.Now().Unix(),
+		"exp":  time.Now().Add(7 * 24 * time.Hour).Unix(),
+		"iss":  "localdnd-api",
+	}
+
+	token := jwt.NewWithClaims(
+		jwt.SigningMethodHS256,
+		claims,
+	)
+
+	return token.SignedString(s.jwtSecret)
+}
