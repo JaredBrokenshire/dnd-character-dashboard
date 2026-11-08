@@ -4,6 +4,7 @@
 
 - Created `users`, `roles` and `user_roles` tables with migrations
 - Created user model and role model
+- Added response wrapper for endpoint responses
 
 ## V0.0.3 - Server Logging 08/11/26
 
