@@ -7,6 +7,7 @@
 - Added README and CHANGELOG
 - Added go main method in backend directory
 - Added echo server with gorm DB
+- Added custom validator to server
 
 > - **[Added]** — New features, files, endpoints, components, or dependencies introduced in this version
 > - **[Changed]** — Modifications to existing behaviour, UI, configuration, or structure that are not bug fixes

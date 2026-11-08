@@ -2,7 +2,9 @@ package main
 
 import (
 	"dnd-character-dashboard/api"
+	"dnd-character-dashboard/pkg/validation"
 	"fmt"
+	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -20,6 +22,7 @@ func main() {
 	_ = godotenv.Load()
 
 	server := api.NewServer()
+	server.Echo.Validator = validation.NewCustomValidator(validator.New())
 
 	if err := server.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))).Error(); err != "" {
 		panic(err)
