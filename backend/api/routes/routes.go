@@ -38,4 +38,6 @@ func RegisterRoutes(s *api.Server) {
 	// Routes
 	authRoutes(s)
 	fileRoutes(s)
+
+	classRoutes(s)
 }

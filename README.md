@@ -112,6 +112,12 @@ All routes are registered under the root path (`/`). Every protected route requi
 | GET | `/auth/me` | ✓ | Get the authenticated user's profile |
 | POST | `/auth/logout` | ✓ | Logout and invalidate the session |
 
+**Class**
+
+| Method | Path             | Auth | Description                   |
+|--------|------------------|------|-------------------------------|
+| GET | `/classes`    | ✓ | Get paginated list of classes |
+
 ---
 
 ## Environment Variables
