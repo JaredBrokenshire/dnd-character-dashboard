@@ -1,3 +1,10 @@
+## V0.0.4 - Auth `DATE`
+
+### [Added]
+
+- Created `users`, `roles` and `user_roles` tables with migrations
+- Created user model and role model
+
 ## V0.0.3 - Server Logging 08/11/26
 
 ### [Added]
