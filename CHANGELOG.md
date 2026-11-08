@@ -1,3 +1,13 @@
+## V0.0.7 - Class List `DATE`
+
+### [Added]
+
+- Added a new `classes` table with a migration and corresponding model
+- Added a new class handler with a paginated list endpoint
+- Added a class service and repo
+- Added paginate method to database layer
+- Added file and class factories for creating test models
+
 ## V0.0.6 - File Storage 08/11/26
 
 ### [Added]
