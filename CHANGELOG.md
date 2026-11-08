@@ -1,3 +1,10 @@
+## V0.0.2 - Frontend Setup 08/11/26
+
+### [Added]
+
+- Initialised Vue2 project with tailwind, vue-router and ESLint
+- Added temp home page
+
 ## V0.0.1 - Backend Setup 08/11/26
 
 ### [Added]
