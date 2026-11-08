@@ -1,4 +1,4 @@
-## V0.0.7 - Class List `DATE`
+## V0.0.7 - Class List 08/11/26
 
 ### [Added]
 
