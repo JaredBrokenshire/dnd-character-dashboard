@@ -362,3 +362,64 @@ func TestAuth_Refresh(t *testing.T) {
 		})
 	}
 }
+
+func TestAuth_Me(t *testing.T) {
+	ts.ClearTable("users")
+	ts.ClearTable("roles")
+	ts.ClearTable("user_roles")
+	ts.SetupDefaultUsers()
+
+	request := helpers.Request{
+		Method: http.MethodGet,
+		Url:    "/auth/me",
+	}
+
+	RunNoAuthenticationTests(t, request.Method, request.Url)
+
+	cases := []helpers.TestCase{
+		{
+			Name: "Can't get current user if the user no longer exists",
+			Setup: func(test *helpers.TestCase) {
+				// Generate a valid access token for the admin user, then delete the user
+				// so the handler receives a valid non-zero ID that doesn't exist in the DB.
+				accessToken, err := ts.S.Dependencies.GetAuthService().GenerateAccessToken(ts.AdminUser)
+				if err != nil {
+					return
+				}
+				ts.ClearTable("users")
+				test.RequestHeaders = map[string]string{
+					"Authorization": "Bearer " + accessToken,
+				}
+			},
+			Request: request,
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusNotFound,
+				BodyPart:   "User not found",
+			},
+			Teardown: func() {
+				ts.SetupDefaultUsers()
+			},
+		},
+		{
+			Name:    "Can get current user when authenticated",
+			Request: request,
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusOK,
+				BodyParts: []string{
+					fmt.Sprintf(`"username":"%v"`, ts.AdminUser.Username),
+					fmt.Sprintf(`"email":"%v"`, ts.AdminUser.Email),
+					`"roles":`,
+				},
+				BodyPartsMissing: []string{
+					helpers.AdminPassword,
+				},
+			},
+		},
+	}
+
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			RunAuthorisedTestCase(t, test)
+		})
+	}
+}

@@ -18,11 +18,16 @@ type SlimUserResponse struct {
 }
 
 func NewUserResponse(user *models.User) *UserResponse {
-	return &UserResponse{
+	res := &UserResponse{
 		SlimUserResponse: NewSlimUserResponse(user),
 		Email:            user.Email,
-		Roles:            NewRoleResponses(user.Roles),
 	}
+
+	if len(user.Roles) > 0 {
+		res.Roles = NewRoleResponses(user.Roles)
+	}
+
+	return res
 }
 
 func NewSlimUserResponse(user *models.User) *SlimUserResponse {

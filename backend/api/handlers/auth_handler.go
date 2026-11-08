@@ -156,6 +156,33 @@ func (h *AuthHandler) Refresh(c echo.Context) error {
 	return responses.Response(c, http.StatusOK, res)
 }
 
+// Me godoc
+// @Summary Get current user
+// @Description Gets the current logged in user
+// @ID auth-me
+// @Tags Auth Actions
+// @Accept json
+// @Produce json
+// @Success 200 {object} responses.UserResponse
+// @Failure 401 {object} responses.Error
+// @Router /auth/me [get]
+func (h *AuthHandler) Me(c echo.Context) error {
+	userID, ok := c.Get("userID").(uint)
+	if !ok || userID == 0 {
+		logging.Logger.LogWarn().Msg("auth/me user not found")
+		return responses.ErrorResponse(c, http.StatusUnauthorized, "Unauthorized")
+	}
+
+	user, err := h.server.Dependencies.GetUserService().GetUserByID(userID)
+	if err != nil {
+		logging.Logger.LogWarn().Msg("auth/me user not found")
+		return responses.ErrorResponse(c, http.StatusNotFound, "User not found")
+	}
+
+	res := responses.NewUserResponse(user)
+	return responses.Response(c, http.StatusOK, res)
+}
+
 func (h *AuthHandler) setRefreshCookie(c echo.Context, token string) {
 	// Use Secure: true in production (requires HTTPS). Controlled by ENVIRONMENT env var.
 	secureCookie := strings.EqualFold(os.Getenv("ENVIRONMENT"), "production")

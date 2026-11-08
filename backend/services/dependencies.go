@@ -13,6 +13,7 @@ type Dependencies struct {
 
 	// Services
 	authService AuthServiceInterface
+	userService UserServiceInterface
 }
 
 func NewDependencies(db *gorm.DB, repos *repositories.Repos) *Dependencies {
@@ -37,4 +38,16 @@ func (d *Dependencies) GetAuthService() AuthServiceInterface {
 
 func (d *Dependencies) SetAuthService(authService AuthServiceInterface) {
 	d.authService = authService
+}
+
+func (d *Dependencies) GetUserService() UserServiceInterface {
+	if d.userService == nil {
+		d.userService = NewUserService(d.repos.User)
+	}
+
+	return d.userService
+}
+
+func (d *Dependencies) SetUserService(userService UserServiceInterface) {
+	d.userService = userService
 }
