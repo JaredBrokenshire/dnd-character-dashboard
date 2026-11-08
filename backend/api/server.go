@@ -3,6 +3,7 @@ package api
 import (
 	database "dnd-character-dashboard/db"
 	"dnd-character-dashboard/db/repositories"
+	"dnd-character-dashboard/services"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"time"
