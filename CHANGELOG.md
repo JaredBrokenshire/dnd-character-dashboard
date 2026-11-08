@@ -21,6 +21,10 @@
 - Added 404 page
 - Added page header
 
+### [Changed]
+
+- Change github workflow to run on pr instead of push
+
 ## V0.0.3 - Server Logging 08/11/26
 
 ### [Added]
