@@ -1,3 +1,10 @@
+## V0.0.6 - File Storage `DATE`
+
+### [Added]
+
+- Added local file storage with new dependencies service
+- Added protected file endpoint with response objects
+
 ## V0.0.5 - Home Page 08/11/26
 
 ### [Changed]
