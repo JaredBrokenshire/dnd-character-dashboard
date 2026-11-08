@@ -1,4 +1,4 @@
-## V0.0.6 - File Storage `DATE`
+## V0.0.6 - File Storage 08/11/26
 
 ### [Added]
 
