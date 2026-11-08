@@ -73,6 +73,51 @@ func (h *AuthHandler) Register(c echo.Context) error {
 	return responses.Response(c, http.StatusOK, res)
 }
 
+// Login godoc
+// @Summary User Login
+// @Description Log a user in
+// @ID auth-login
+// @Tags Auth Actions
+// @Accept json
+// @Produce json
+// @Param params body requests.LoginRequest true "User's credentials"
+// @Success 200 {object} responses.AuthResponse
+// @Failure 400 {object} responses.Error
+// @Failure 401 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /auth/login [post]
+func (h *AuthHandler) Login(c echo.Context) error {
+	request := new(requests.LoginRequest)
+	if err := c.Bind(request); err != nil {
+		logging.Logger.LogError().Msg("auth/login bind error: " + err.Error())
+		return err
+	}
+	if err := c.Validate(request); err != nil {
+		logging.Logger.LogError().Msg("auth/login request validation error: " + err.Error())
+		return responses.ErrorResponse(c, http.StatusBadRequest, "Required fields are empty or not valid: "+err.Error())
+	}
+
+	dto := services.LoginRequestDTO{
+		Username: request.Username,
+		Password: request.Password,
+	}
+
+	authResponse, refreshToken, err := h.server.Dependencies.GetAuthService().Login(dto)
+	switch {
+	case errors.Is(err, services.ErrInvalidCredentials):
+		logging.Logger.LogWarn().Msg("auth/login invalid credentials")
+		return responses.ErrorResponse(c, http.StatusUnauthorized, "Invalid credentials")
+	case err != nil:
+		logging.Logger.LogError().Msg("auth/login error: " + err.Error())
+		return responses.ErrorResponse(c, http.StatusInternalServerError, "There was an error logging in")
+	}
+
+	h.setRefreshCookie(c, refreshToken)
+
+	res := responses.NewAuthResponse(authResponse.User, authResponse.AccessToken)
+	return responses.Response(c, http.StatusOK, res)
+}
+
 func (h *AuthHandler) setRefreshCookie(c echo.Context, token string) {
 	// Use Secure: true in production (requires HTTPS). Controlled by ENVIRONMENT env var.
 	secureCookie := strings.EqualFold(os.Getenv("ENVIRONMENT"), "production")

@@ -9,7 +9,7 @@ import (
 type Dependencies struct {
 	db        *gorm.DB
 	repos     *repositories.Repos
-	jwtSecret []byte
+	jwtSecret string
 
 	// Services
 	authService AuthServiceInterface
@@ -19,7 +19,7 @@ func NewDependencies(db *gorm.DB, repos *repositories.Repos) *Dependencies {
 	return &Dependencies{
 		db:        db,
 		repos:     repos,
-		jwtSecret: []byte(os.Getenv("JWT_SECRET")),
+		jwtSecret: os.Getenv("JWT_SECRET"),
 	}
 }
 

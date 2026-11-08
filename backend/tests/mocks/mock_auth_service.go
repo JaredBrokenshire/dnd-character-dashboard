@@ -9,6 +9,9 @@ type MockAuthService struct {
 	RegisterCalls []services.RegisterRequestDTO
 	RegisterError error
 
+	LoginCalls []services.LoginRequestDTO
+	LoginError error
+
 	GenerateAccessTokenCalls []*models.User
 	GenerateAccessTokenError error
 
@@ -21,6 +24,9 @@ func NewMockAuthService() *MockAuthService {
 		RegisterCalls: []services.RegisterRequestDTO{},
 		RegisterError: nil,
 
+		LoginCalls: []services.LoginRequestDTO{},
+		LoginError: nil,
+
 		GenerateAccessTokenCalls: []*models.User{},
 		GenerateAccessTokenError: nil,
 
@@ -32,6 +38,11 @@ func NewMockAuthService() *MockAuthService {
 func (m *MockAuthService) Register(dto services.RegisterRequestDTO) (*services.AuthResponse, string, error) {
 	m.RegisterCalls = append(m.RegisterCalls, dto)
 	return nil, "", m.RegisterError
+}
+
+func (m *MockAuthService) Login(dto services.LoginRequestDTO) (*services.AuthResponse, string, error) {
+	m.LoginCalls = append(m.LoginCalls, dto)
+	return nil, "", m.LoginError
 }
 
 func (m *MockAuthService) GenerateAccessToken(user *models.User) (string, error) {

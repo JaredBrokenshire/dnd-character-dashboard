@@ -14,6 +14,7 @@ import (
 
 type AuthServiceInterface interface {
 	Register(dto RegisterRequestDTO) (*AuthResponse, string, error)
+	Login(dto LoginRequestDTO) (*AuthResponse, string, error)
 	GenerateAccessToken(user *models.User) (string, error)
 	GenerateRefreshToken(user *models.User) (string, error)
 }
@@ -24,9 +25,10 @@ type AuthResponse struct {
 }
 
 var (
-	ErrUsernameTaken    = errors.New("username already taken")
-	ErrEmailTaken       = errors.New("email already registered")
-	ErrPasswordNotMatch = errors.New("passwords do not match")
+	ErrUsernameTaken      = errors.New("username already taken")
+	ErrEmailTaken         = errors.New("email already registered")
+	ErrPasswordNotMatch   = errors.New("passwords do not match")
+	ErrInvalidCredentials = errors.New("invalid credentials")
 )
 
 type AuthService struct {
@@ -36,12 +38,12 @@ type AuthService struct {
 	jwtSecret []byte
 }
 
-func NewAuthService(db *gorm.DB, userRepo *repositories.UserRepository, roleRepo *repositories.RoleRepository, jwtSecret []byte) *AuthService {
+func NewAuthService(db *gorm.DB, userRepo *repositories.UserRepository, roleRepo *repositories.RoleRepository, jwtSecret string) *AuthService {
 	return &AuthService{
 		db:        db,
 		userRepo:  userRepo,
 		roleRepo:  roleRepo,
-		jwtSecret: jwtSecret,
+		jwtSecret: []byte(jwtSecret),
 	}
 }
 
@@ -84,6 +86,38 @@ func (s *AuthService) Register(dto RegisterRequestDTO) (*AuthResponse, string, e
 	err = s.userRepo.Create(user)
 	if err != nil {
 		return nil, "", err
+	}
+
+	accessToken, err := s.GenerateAccessToken(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	refreshToken, err := s.GenerateRefreshToken(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return &AuthResponse{
+		AccessToken: accessToken,
+		User:        user,
+	}, refreshToken, nil
+}
+
+type LoginRequestDTO struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+func (s *AuthService) Login(dto LoginRequestDTO) (*AuthResponse, string, error) {
+	user := s.userRepo.GetByUsername(dto.Username)
+	if user.ID == 0 {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(dto.Password))
+	if err != nil {
+		return nil, "", ErrInvalidCredentials
 	}
 
 	accessToken, err := s.GenerateAccessToken(user)

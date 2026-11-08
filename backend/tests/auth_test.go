@@ -6,6 +6,7 @@ import (
 	"dnd-character-dashboard/tests/helpers"
 	"dnd-character-dashboard/tests/mocks"
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 	"testing"
@@ -103,7 +104,7 @@ func TestAuth_Register(t *testing.T) {
 						ts.S.DB,
 						ts.S.Repos.User,
 						ts.S.Repos.Role,
-						[]byte(os.Getenv("JWT_SECRET")),
+						os.Getenv("JWT_SECRET"),
 					),
 				)
 			},
@@ -126,6 +127,108 @@ func TestAuth_Register(t *testing.T) {
 				},
 				BodyPartsMissing: []string{
 					"test-password",
+				},
+			},
+		},
+	}
+
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			RunAuthorisedTestCase(t, test)
+		})
+	}
+}
+
+func TestAuth_Login(t *testing.T) {
+	ts.ClearTable("users")
+	ts.SetupDefaultUsers()
+
+	request := helpers.Request{
+		Method: http.MethodPost,
+		Url:    "/auth/login",
+	}
+
+	cases := []helpers.TestCase{
+		{
+			Name:        "Can't login without the required fields",
+			Request:     request,
+			RequestBody: requests.LoginRequest{},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusBadRequest,
+				BodyParts: []string{
+					"Required fields are empty or not valid",
+					"Username is a required field",
+					"Password is a required field",
+				},
+			},
+		},
+		{
+			Name:    "Can't login with username that doesn't exist",
+			Request: request,
+			RequestBody: requests.LoginRequest{
+				Username: "Invalid Username",
+				Password: "Invalid Password",
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusUnauthorized,
+				BodyPart:   "Invalid credentials",
+			},
+		},
+		{
+			Name:    "Can't login with incorrect password",
+			Request: request,
+			RequestBody: requests.LoginRequest{
+				Username: helpers.AdminUsername,
+				Password: "Incorrect Password",
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusUnauthorized,
+				BodyPart:   "Invalid credentials",
+			},
+		},
+		{
+			Name: "Can't login if there is an error from the auth service",
+			Setup: func(test *helpers.TestCase) {
+				mockAuthService := mocks.NewMockAuthService()
+				mockAuthService.LoginError = errors.New("test error")
+
+				ts.S.Dependencies.SetAuthService(mockAuthService)
+			},
+			Request: request,
+			RequestBody: requests.LoginRequest{
+				Username: helpers.AdminUsername,
+				Password: helpers.AdminPassword,
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusInternalServerError,
+				BodyPart:   "There was an error logging in",
+			},
+			Teardown: func() {
+				ts.S.Dependencies.SetAuthService(
+					services.NewAuthService(
+						ts.S.DB,
+						ts.S.Repos.User,
+						ts.S.Repos.Role,
+						os.Getenv("JWT_SECRET"),
+					),
+				)
+			},
+		},
+		{
+			Name:    "Can login with correct credentials",
+			Request: request,
+			RequestBody: requests.LoginRequest{
+				Username: helpers.AdminUsername,
+				Password: helpers.AdminPassword,
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusOK,
+				BodyParts: []string{
+					`"access_token":"`,
+					fmt.Sprintf(`"username":"%v"`, ts.AdminUser.Username),
+				},
+				BodyPartsMissing: []string{
+					helpers.AdminPassword,
 				},
 			},
 		},

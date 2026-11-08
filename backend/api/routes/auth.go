@@ -14,5 +14,6 @@ func authRoutes(s *api.Server) {
 	limiterStore := middleware.NewRateLimiterMemoryStore(config.Get().LoginRateLimit)
 
 	auth.POST("/register", authHandler.Register, middleware.RateLimiter(limiterStore))
+	auth.POST("/login", authHandler.Login, middleware.RateLimiter(limiterStore))
 
 }
