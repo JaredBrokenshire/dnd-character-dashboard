@@ -3,6 +3,7 @@ package api
 import (
 	database "dnd-character-dashboard/db"
 	"dnd-character-dashboard/db/repositories"
+	"dnd-character-dashboard/pkg/file_storage"
 	"dnd-character-dashboard/services"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
@@ -23,6 +24,8 @@ func NewServer() *Server {
 	}
 	time.Local = utc
 
+	fileStore := file_storage.NewLocalStorage("assets/files")
+
 	db, err := database.Init()
 	if err != nil {
 		panic(err)
@@ -35,6 +38,7 @@ func NewServer() *Server {
 
 	s.Repos = repositories.NewRepos(s.DB)
 	s.Dependencies = services.NewDependencies(s.DB, s.Repos)
+	s.Dependencies.SetFileStore(fileStore)
 
 	return s
 }
