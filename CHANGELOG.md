@@ -1,3 +1,8 @@
+## V0.0.3 - Server Logging `DATE`
+
+### [Added]
+
+- Added logging package with middleware function
 
 ## V0.0.2 - Frontend Setup 08/11/26
 

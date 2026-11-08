@@ -2,6 +2,7 @@ package routes
 
 import (
 	"dnd-character-dashboard/api"
+	mw "dnd-character-dashboard/pkg/middleware"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"os"
@@ -9,6 +10,7 @@ import (
 )
 
 func RegisterRoutes(s *api.Server) {
+	s.Echo.Use(mw.LoggingMiddleware())
 	s.Echo.Use(middleware.Recover())
 
 	// CORS origins are configured via the CORS_ORIGINS env var (comma-separated).
@@ -32,5 +34,4 @@ func RegisterRoutes(s *api.Server) {
 		},
 		AllowCredentials: true,
 	}))
-	
 }

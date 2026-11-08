@@ -3,6 +3,7 @@ package main
 import (
 	"dnd-character-dashboard/api"
 	"dnd-character-dashboard/api/routes"
+	"dnd-character-dashboard/pkg/logging"
 	"dnd-character-dashboard/pkg/validation"
 	"fmt"
 	"github.com/go-playground/validator/v10"
@@ -24,11 +25,10 @@ func main() {
 
 	server := api.NewServer()
 	server.Echo.Validator = validation.NewCustomValidator(validator.New())
+	server.Echo.HideBanner = true
 
 	routes.RegisterRoutes(server)
 
 	// Start Server
-	if err := server.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))).Error(); err != "" {
-		panic(err)
-	}
+	logging.Logger.LogInfo().Msg(server.Start(fmt.Sprintf(":%v", os.Getenv("PORT"))).Error())
 }
