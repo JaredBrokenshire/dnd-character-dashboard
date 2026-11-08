@@ -1,4 +1,4 @@
-## V0.0.1 - Project Setup 08/11/26
+## V0.0.1 - Backend Setup 08/11/26
 
 ### [Added]
 
