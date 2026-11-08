@@ -15,6 +15,9 @@
 - Added me endpoint to return the current user
 - Added logout endpoint
 - Added seeder to set inital users and roles
+- Added frontend login/register pages with route protection
+- Added vee-validate for form validation and FeatherIcons
+- Added page layout with image background
 
 ## V0.0.3 - Server Logging 08/11/26
 
