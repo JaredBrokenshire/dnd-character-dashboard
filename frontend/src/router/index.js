@@ -15,6 +15,7 @@ const router = new Router({
       component: () => import("@/views/home/Home"),
       meta: {
         requiresAuth: true,
+        showHeader: true,
       }
     },
     ...authRoutes,
