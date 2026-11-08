@@ -8,6 +8,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.6
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jinzhu/gorm v1.9.16
+	github.com/jmoiron/sqlx v1.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.16.3
 	github.com/selvatico/go-mocket v1.0.7

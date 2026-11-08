@@ -1,6 +1,8 @@
 package api
 
 import (
+	database "dnd-character-dashboard/db"
+	"dnd-character-dashboard/db/repositories"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"time"
@@ -20,7 +22,7 @@ func NewServer() *Server {
 	}
 	time.Local = utc
 
-	db, err := db.Init()
+	db, err := database.Init()
 	if err != nil {
 		panic(err)
 	}
