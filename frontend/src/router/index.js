@@ -18,6 +18,14 @@ const router = new Router({
       }
     },
     ...authRoutes,
+    {
+      path: '/404',
+      name: 'error-404-page',
+      component: () => import('@/views/error/Error404.vue'),
+      meta: {
+        requiresAuth: true,
+        showHeader: true,
+      }
     }
   ]
 });

@@ -18,6 +18,7 @@
 - Added frontend login/register pages with route protection
 - Added vee-validate for form validation and FeatherIcons
 - Added page layout with image background
+- Added 404 page
 
 ## V0.0.3 - Server Logging 08/11/26
 
