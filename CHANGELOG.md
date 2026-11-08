@@ -7,6 +7,7 @@
 - Added response wrapper for endpoint responses
 - Added user, role and auth response objects
 - Added auth register request object
+- Added auth handler with register route, user and role repos
 
 ## V0.0.3 - Server Logging 08/11/26
 
