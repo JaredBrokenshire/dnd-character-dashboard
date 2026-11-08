@@ -1,3 +1,4 @@
+
 ## V0.0.2 - Frontend Setup 08/11/26
 
 ### [Added]
