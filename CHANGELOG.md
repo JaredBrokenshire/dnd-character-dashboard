@@ -4,6 +4,7 @@
 
 - Initialised Vue2 project with tailwind, vue-router and ESLint
 - Added temp home page
+- Added API service to send http requests with axios
 
 ## V0.0.1 - Backend Setup 08/11/26
 
