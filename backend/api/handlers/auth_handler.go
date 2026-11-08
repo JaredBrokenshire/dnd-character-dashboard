@@ -118,6 +118,44 @@ func (h *AuthHandler) Login(c echo.Context) error {
 	return responses.Response(c, http.StatusOK, res)
 }
 
+// Refresh godoc
+// @Summary Refresh token
+// @Description Refreshes the given token.
+// @ID auth-refresh
+// @Tags Auth Actions
+// @Accept json
+// @Produce json
+// @Success 200 {object} responses.AuthResponse
+// @Failure 401 {object} responses.Error
+// @Failure 404 {object} responses.Error
+// @Failure 500 {object} responses.Error
+// @Router /auth/refresh [post]
+func (h *AuthHandler) Refresh(c echo.Context) error {
+	cookie, err := c.Cookie("refresh_token")
+	if err != nil {
+		logging.Logger.LogWarn().Msg("auth/refresh token not found")
+		return responses.ErrorResponse(c, http.StatusUnauthorized, "Refresh token not found")
+	}
+
+	authResponse, refreshToken, err := h.server.Dependencies.GetAuthService().Refresh(cookie.Value)
+	switch {
+	case errors.Is(err, services.ErrInvalidCredentials):
+		logging.Logger.LogWarn().Msg("auth/refresh invalid token")
+		return responses.ErrorResponse(c, http.StatusUnauthorized, "Invalid refresh token")
+	case errors.Is(err, services.ErrUserNotFound):
+		logging.Logger.LogWarn().Msg("auth/refresh user not found")
+		return responses.ErrorResponse(c, http.StatusNotFound, "User not found")
+	case err != nil:
+		logging.Logger.LogError().Msg("auth/refresh error: " + err.Error())
+		return responses.ErrorResponse(c, http.StatusInternalServerError, "There was a problem refreshing the token")
+	}
+
+	h.setRefreshCookie(c, refreshToken)
+
+	res := responses.NewAuthResponse(authResponse.User, authResponse.AccessToken)
+	return responses.Response(c, http.StatusOK, res)
+}
+
 func (h *AuthHandler) setRefreshCookie(c echo.Context, token string) {
 	// Use Secure: true in production (requires HTTPS). Controlled by ENVIRONMENT env var.
 	secureCookie := strings.EqualFold(os.Getenv("ENVIRONMENT"), "production")

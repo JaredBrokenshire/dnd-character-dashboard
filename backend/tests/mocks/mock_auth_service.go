@@ -12,6 +12,9 @@ type MockAuthService struct {
 	LoginCalls []services.LoginRequestDTO
 	LoginError error
 
+	RefreshCalls []string
+	RefreshError error
+
 	GenerateAccessTokenCalls []*models.User
 	GenerateAccessTokenError error
 
@@ -26,6 +29,9 @@ func NewMockAuthService() *MockAuthService {
 
 		LoginCalls: []services.LoginRequestDTO{},
 		LoginError: nil,
+
+		RefreshCalls: []string{},
+		RefreshError: nil,
 
 		GenerateAccessTokenCalls: []*models.User{},
 		GenerateAccessTokenError: nil,
@@ -45,6 +51,11 @@ func (m *MockAuthService) Login(dto services.LoginRequestDTO) (*services.AuthRes
 	return nil, "", m.LoginError
 }
 
+func (m *MockAuthService) Refresh(refreshToken string) (*services.AuthResponse, string, error) {
+	m.RefreshCalls = append(m.RefreshCalls, refreshToken)
+	return nil, "", m.RefreshError
+}
+
 func (m *MockAuthService) GenerateAccessToken(user *models.User) (string, error) {
 	m.GenerateAccessTokenCalls = append(m.GenerateAccessTokenCalls, user)
 	return "", m.GenerateAccessTokenError
@@ -58,6 +69,12 @@ func (m *MockAuthService) GenerateRefreshToken(user *models.User) (string, error
 func (m *MockAuthService) Reset() {
 	m.RegisterCalls = []services.RegisterRequestDTO{}
 	m.RegisterError = nil
+
+	m.LoginCalls = []services.LoginRequestDTO{}
+	m.LoginError = nil
+
+	m.RefreshCalls = []string{}
+	m.RefreshError = nil
 
 	m.GenerateAccessTokenCalls = []*models.User{}
 	m.GenerateAccessTokenError = nil

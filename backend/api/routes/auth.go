@@ -15,5 +15,5 @@ func authRoutes(s *api.Server) {
 
 	auth.POST("/register", authHandler.Register, middleware.RateLimiter(limiterStore))
 	auth.POST("/login", authHandler.Login, middleware.RateLimiter(limiterStore))
-
+	auth.POST("/refresh", authHandler.Refresh, middleware.RateLimiter(limiterStore))
 }

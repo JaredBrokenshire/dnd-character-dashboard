@@ -240,3 +240,125 @@ func TestAuth_Login(t *testing.T) {
 		})
 	}
 }
+
+func TestAuth_Refresh(t *testing.T) {
+	ts.ClearTable("users")
+	ts.SetupDefaultUsers()
+
+	request := helpers.Request{
+		Method: http.MethodPost,
+		Url:    "/auth/refresh",
+	}
+
+	// Obtain a valid refresh token by logging in first
+	loginReq := helpers.Request{Method: http.MethodPost, Url: "/auth/login"}
+	loginCase := helpers.TestCase{
+		Request: loginReq,
+		RequestBody: requests.LoginRequest{
+			Username: helpers.AdminUsername,
+			Password: helpers.AdminPassword,
+		},
+		Expected: helpers.ExpectedResponse{StatusCode: http.StatusOK},
+	}
+	loginRes := ts.ExecuteTestCase(&loginCase)
+	var refreshCookie *http.Cookie
+	for _, c := range loginRes.Result().Cookies() {
+		if c.Name == "refresh_token" {
+			refreshCookie = c
+			break
+		}
+	}
+
+	cases := []helpers.TestCase{
+		{
+			Name:    "Can't refresh without a refresh token cookie",
+			Request: request,
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusUnauthorized,
+				BodyPart:   "Refresh token not found",
+			},
+		},
+		{
+			Name:    "Can't refresh with an invalid refresh token",
+			Request: request,
+			RequestCookies: []*http.Cookie{
+				{Name: "refresh_token", Value: "invalid.token.value"},
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusUnauthorized,
+				BodyPart:   "Invalid refresh token",
+			},
+		},
+		{
+			Name: "Can't refresh when the user no longer exists",
+			Setup: func(test *helpers.TestCase) {
+				// Create a temporary user, get a refresh token, then delete the user
+				tempUser := ts.AdminUser
+				refreshToken, err := ts.S.Dependencies.GetAuthService().GenerateRefreshToken(tempUser)
+				if err != nil {
+					return
+				}
+				ts.ClearTable("users")
+				test.RequestCookies = []*http.Cookie{
+					{Name: "refresh_token", Value: refreshToken},
+				}
+			},
+			Request: request,
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusNotFound,
+				BodyPart:   "User not found",
+			},
+			Teardown: func() {
+				ts.SetupDefaultUsers()
+				// Re-obtain the refresh cookie after users are recreated
+			},
+		},
+		{
+			Name: "Can't refresh if there is an error from the auth service",
+			Setup: func(test *helpers.TestCase) {
+				mockAuthService := mocks.NewMockAuthService()
+				mockAuthService.RefreshError = errors.New("test error")
+
+				ts.S.Dependencies.SetAuthService(mockAuthService)
+			},
+			Request: request,
+			RequestCookies: []*http.Cookie{
+				{Name: "refresh_token", Value: "any.token.value"},
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusInternalServerError,
+				BodyPart:   "There was a problem refreshing the token",
+			},
+			Teardown: func() {
+				ts.S.Dependencies.SetAuthService(
+					services.NewAuthService(
+						ts.S.DB,
+						ts.S.Repos.User,
+						ts.S.Repos.Role,
+						os.Getenv("JWT_SECRET"),
+					),
+				)
+			},
+		},
+		{
+			Name:    "Can refresh with a valid refresh token",
+			Request: request,
+			RequestCookies: []*http.Cookie{
+				refreshCookie,
+			},
+			Expected: helpers.ExpectedResponse{
+				StatusCode: http.StatusOK,
+				BodyParts: []string{
+					`"access_token":"`,
+					fmt.Sprintf(`"username":"%v"`, ts.AdminUser.Username),
+				},
+			},
+		},
+	}
+
+	for _, test := range cases {
+		t.Run(test.Name, func(t *testing.T) {
+			RunUnauthorisedTestCase(t, test)
+		})
+	}
+}

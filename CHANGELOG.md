@@ -11,6 +11,7 @@
 - Added auth service with JWT middleware
 - Added auth register endpoint tests
 - Added login endpoint with new service method
+- Added refresh endpoint with new service method
 
 ## V0.0.3 - Server Logging 08/11/26
 

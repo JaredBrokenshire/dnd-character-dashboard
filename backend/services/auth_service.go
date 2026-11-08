@@ -15,6 +15,7 @@ import (
 type AuthServiceInterface interface {
 	Register(dto RegisterRequestDTO) (*AuthResponse, string, error)
 	Login(dto LoginRequestDTO) (*AuthResponse, string, error)
+	Refresh(refreshToken string) (*AuthResponse, string, error)
 	GenerateAccessToken(user *models.User) (string, error)
 	GenerateRefreshToken(user *models.User) (string, error)
 }
@@ -29,6 +30,7 @@ var (
 	ErrEmailTaken         = errors.New("email already registered")
 	ErrPasswordNotMatch   = errors.New("passwords do not match")
 	ErrInvalidCredentials = errors.New("invalid credentials")
+	ErrUserNotFound       = errors.New("user not found")
 )
 
 type AuthService struct {
@@ -126,6 +128,50 @@ func (s *AuthService) Login(dto LoginRequestDTO) (*AuthResponse, string, error) 
 	}
 
 	refreshToken, err := s.GenerateRefreshToken(user)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return &AuthResponse{
+		AccessToken: accessToken,
+		User:        user,
+	}, refreshToken, nil
+}
+
+func (s *AuthService) Refresh(refreshToken string) (*AuthResponse, string, error) {
+	token, err := jwt.Parse(refreshToken, func(token *jwt.Token) (interface{}, error) {
+		return s.jwtSecret, nil
+	})
+	if err != nil {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	tokenType, ok := claims["type"].(string)
+	if !ok || tokenType != "refresh" {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	sub, ok := claims["sub"].(string)
+	if !ok {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	userId, err := strconv.ParseUint(sub, 10, 64)
+	if err != nil {
+		return nil, "", ErrInvalidCredentials
+	}
+
+	user := s.userRepo.GetById(userId)
+	if user.ID == 0 {
+		return nil, "", ErrUserNotFound
+	}
+
+	accessToken, err := s.GenerateAccessToken(user)
 	if err != nil {
 		return nil, "", err
 	}
