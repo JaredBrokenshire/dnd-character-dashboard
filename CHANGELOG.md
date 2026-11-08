@@ -14,6 +14,7 @@
 - Added refresh endpoint with new service method
 - Added me endpoint to return the current user
 - Added logout endpoint
+- Added seeder to set inital users and roles
 
 ## V0.0.3 - Server Logging 08/11/26
 
