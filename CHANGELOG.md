@@ -9,6 +9,7 @@
 - Added auth register request object
 - Added auth handler with register route, user and role repos
 - Added auth service with JWT middleware
+- Added auth register endpoint tests
 
 ## V0.0.3 - Server Logging 08/11/26
 

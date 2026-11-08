@@ -181,7 +181,7 @@ func (ts *TestServer) CreateAdminUser() {
 		Username: AdminUsername,
 		Email:    AdminEmail,
 		Password: DefaultPasswordHash,
-		Roles:    []m.Role{adminRole},
+		Roles:    []*m.Role{&adminRole},
 	}
 
 	ts.CreateOrDie(user)
@@ -199,13 +199,13 @@ func (ts *TestServer) CreateAdminUser() {
 // CreateTestUser creates a test user and an auth token.
 func (ts *TestServer) CreateTestUser() {
 	userRole := m.Role{Name: m.RoleUser}
-	ts.S.Db.Where("name = ?", m.RoleUser).FirstOrCreate(&userRole)
+	ts.S.DB.Where("name = ?", m.RoleUser).FirstOrCreate(&userRole)
 
 	user := &m.User{
 		Username: TestUsername,
 		Email:    TestEmail,
 		Password: DefaultPasswordHash,
-		Roles:    []m.Role{userRole},
+		Roles:    []*m.Role{&userRole},
 	}
 
 	ts.CreateOrDie(user)
