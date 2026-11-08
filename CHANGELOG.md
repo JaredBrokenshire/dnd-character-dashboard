@@ -1,4 +1,4 @@
-## V0.0.3 - Server Logging `DATE`
+## V0.0.3 - Server Logging 08/11/26
 
 ### [Added]
 
