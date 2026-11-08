@@ -1,9 +1,9 @@
 name: CI
 
-# Runs on every push and pull request to production and development
+# Runs on every push to main and development
 on:
-  pull_request:
-    branches: [production, development]
+  push:
+    branches: [main, development]
 
 jobs:
   # ── Backend: build + test ────────────────────────────────────────────────────
