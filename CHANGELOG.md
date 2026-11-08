@@ -1,3 +1,9 @@
+## V0.0.5 - Home Page `DATE`
+
+### [Changed]
+
+- Updated the home page to include navigation cards
+
 ## V0.0.4 - Auth 08/11/26
 
 ### [Added]
