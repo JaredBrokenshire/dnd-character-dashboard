@@ -65,7 +65,7 @@ func NewTestServer(envFileLoc string) *TestServer {
 	ts := &TestServer{
 		S: &api.Server{
 			Echo:  echo.New(),
-			Db:    db,
+			DB:    db,
 			Repos: repositories.NewRepos(db),
 		},
 	}
@@ -154,11 +154,11 @@ func (ts *TestServer) ExecuteTestUserRequest(req *http.Request) *httptest.Respon
 
 // ClearTable Clear a table and reset the autoincrement
 func (ts *TestServer) ClearTable(tableName string) {
-	err := ts.S.Db.Exec(fmt.Sprintf("DELETE FROM %v", tableName)).Error
+	err := ts.S.DB.Exec(fmt.Sprintf("DELETE FROM %v", tableName)).Error
 	if err != nil {
 		log.Fatalf("You can't clear that table. Err: %v", err)
 	}
-	err = ts.S.Db.Exec(fmt.Sprintf("ALTER TABLE %v AUTO_INCREMENT = 1", tableName)).Error
+	err = ts.S.DB.Exec(fmt.Sprintf("ALTER TABLE %v AUTO_INCREMENT = 1", tableName)).Error
 	if err != nil {
 		log.Fatalf("Error setting autoincrement. Err: %v", err)
 	}
@@ -175,7 +175,7 @@ func (ts *TestServer) SetupDefaultUsers() {
 // CreateAdminUser creates an admin user and an auth token.
 func (ts *TestServer) CreateAdminUser() {
 	adminRole := m.Role{Name: m.RoleAdmin}
-	ts.S.Db.Where("name = ?", m.RoleAdmin).FirstOrCreate(&adminRole)
+	ts.S.DB.Where("name = ?", m.RoleAdmin).FirstOrCreate(&adminRole)
 
 	user := &m.User{
 		Username: AdminUsername,
@@ -220,13 +220,13 @@ func (ts *TestServer) CreateTestUser() {
 	ts.TestToken = accessToken
 }
 
-// GetDb Return the database from the server
-func (ts *TestServer) GetDb() *gorm.DB {
-	return ts.S.Db
+// GetDB Return the database from the server
+func (ts *TestServer) GetDB() *gorm.DB {
+	return ts.S.DB
 }
 
 func (ts *TestServer) CreateOrDie(o interface{}) {
-	err := ts.S.Db.Create(o).Error
+	err := ts.S.DB.Create(o).Error
 	if err != nil {
 		log.Panicf("Error creating object as part of a test: %v", err)
 	}

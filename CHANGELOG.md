@@ -14,6 +14,7 @@
 - Added db init method with repos
 - Added services package with dependencies handler
 - Added backend dockerfile and docker compose yml, with test file for starting a test db
+- Added go migrations package
 
 > - **[Added]** — New features, files, endpoints, components, or dependencies introduced in this version
 > - **[Changed]** — Modifications to existing behaviour, UI, configuration, or structure that are not bug fixes
