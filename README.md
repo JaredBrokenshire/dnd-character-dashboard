@@ -62,8 +62,8 @@ dnd-character-dashboard/
 │   ├── cmd/api/api.go                  # Entry point — loads env, wires server, starts Echo
 │   ├── api/
 │   │   ├── server.go                   # Server struct (Echo + DB + Repos + Services)
-│   │   ├── handlers/                   # HTTP handlers (auth, character, campaign, file)
-│   │   ├── routes/                     # Route registration (auth, character, campaign, file)
+│   │   ├── handlers/                   # HTTP handlers
+│   │   ├── routes/                     # Route registration
 │   │   ├── requests/                   # Request DTOs
 │   │   └── responses/                  # Response DTOs
 │   ├── config/
@@ -90,7 +90,7 @@ dnd-character-dashboard/
     ├── tailwind.config.js
     └── src/
         ├── router/                     # Vue Router with auth guards (requiresAuth, requiresAdmin, guestOnly)
-        ├── views/                      # Login, Register, Home, CharacterList, Error404
+        ├── views/                      # Page Views
         ├── store/                      # Vuex modules (auth, etc.)
         ├── services/                   # Axios API client + per-resource service modules
         └── components/                 # Shared UI components and layouts
@@ -117,6 +117,18 @@ All routes are registered under the root path (`/`). Every protected route requi
 | Method | Path             | Auth | Description                   |
 |--------|------------------|------|-------------------------------|
 | GET | `/classes`    | ✓ | Get paginated list of classes |
+
+**Race**
+
+| Method | Path     | Auth | Description                 |
+|--------|----------|------|-----------------------------|
+| GET | `/races` | ✓ | Get paginated list of races |
+
+**File**
+
+| Method | Path         | Auth | Description                                       |
+|--------|--------------|------|---------------------------------------------------|
+| GET | `/:filepath` | ✓ | Get file from local storage at location: filepath |
 
 ---
 
