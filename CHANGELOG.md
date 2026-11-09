@@ -1,4 +1,10 @@
-## V0.0.8 - Race List `DATE`
+## V0.0.9 - Frontend Class List 09/11/26
+
+### [Added]
+
+- Added class seeder with seeded files
+
+## V0.0.8 - Race List 09/11/2026
 
 ### [Added]
 
