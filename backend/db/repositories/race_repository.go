@@ -42,3 +42,16 @@ func (r *RaceRepository) Count(scopes []func(db *gorm.DB) *gorm.DB) int {
 
 	return int(count)
 }
+
+func (r *RaceRepository) GetByID(id interface{}) *models.Race {
+	var race models.Race
+
+	r.Db.
+		Preload("Traits").
+		Preload("Variants").
+		Preload("DetailsImage").
+		Where("id = ?", id).
+		First(&race)
+
+	return &race
+}

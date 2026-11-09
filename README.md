@@ -120,9 +120,10 @@ All routes are registered under the root path (`/`). Every protected route requi
 
 **Race**
 
-| Method | Path     | Auth | Description                 |
-|--------|----------|------|-----------------------------|
-| GET | `/races` | ✓ | Get paginated list of races |
+| Method | Path         | Auth | Description                 |
+|--------|--------------|------|-----------------------------|
+| GET | `/races`     | ✓ | Get paginated list of races |
+| GET | `/races/:id` | ✓ | Get race by id              |
 
 **File**
 

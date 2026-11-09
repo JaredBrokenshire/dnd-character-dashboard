@@ -1,3 +1,10 @@
+## V0.0.11 - Race Details 09/11/26
+
+### [Added]
+
+- Added race get by id endpoint with new handler, service and repo methods
+- Added race variant factory
+
 ## V0.0.10 - Frontend Race List 09/11/26
 
 ### [Added]

@@ -14,4 +14,5 @@ func raceRoutes(s *api.Server) {
 	race.Use(mw.JWTAuth(os.Getenv("JWT_SECRET")))
 
 	race.GET("", raceHandler.List)
+	race.GET("/:id", raceHandler.Get)
 }

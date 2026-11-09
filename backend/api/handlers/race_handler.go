@@ -3,6 +3,9 @@ package handlers
 import (
 	"dnd-character-dashboard/api"
 	"dnd-character-dashboard/api/responses"
+	"dnd-character-dashboard/pkg/logging"
+	"dnd-character-dashboard/services"
+	"errors"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
@@ -48,5 +51,33 @@ func (h *RaceHandler) List(c echo.Context) error {
 	count := h.server.Dependencies.GetRaceService().Count(scopes)
 
 	res := responses.NewPaginatedRaceResponse(races, count, page, pageSize)
+	return responses.Response(c, http.StatusOK, res)
+}
+
+// Get godoc
+// @Summary Get race by ID
+// @Description Get race by ID
+// @ID races-get
+// @Tags Race Actions
+// @Accept json
+// @Produce json
+// @Param id path int true "Race ID"
+// @Error 404 {object} responses.ErrorResponse
+// @Success 200 {object} responses.RaceResponse
+// @Router /races/{id} [get]
+func (h *RaceHandler) Get(c echo.Context) error {
+	id := c.Param("id")
+
+	race, err := h.server.Dependencies.GetRaceService().Get(id)
+	switch {
+	case errors.Is(err, services.ErrRaceNotFound):
+		logging.Logger.LogWarn().Msg("race/get race not found" + err.Error())
+		return responses.ErrorResponse(c, http.StatusNotFound, "Race not found")
+	case err != nil:
+		logging.Logger.LogError().Msg("race/get error: " + err.Error())
+		return responses.ErrorResponse(c, http.StatusInternalServerError, "There was an error getting the race")
+	}
+
+	res := responses.NewRaceResponse(race)
 	return responses.Response(c, http.StatusOK, res)
 }
