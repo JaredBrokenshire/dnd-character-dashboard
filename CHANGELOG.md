@@ -1,3 +1,9 @@
+## V0.0.10 - Frontend Race List 09/11/26
+
+### [Changed]
+
+- Updated race variant model to correctly include race id foreign key
+
 ## V0.0.9 - Frontend Class List 09/11/26
 
 ### [Added]
