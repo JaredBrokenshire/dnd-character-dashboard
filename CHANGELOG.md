@@ -4,6 +4,7 @@
 
 - Added class seeder with seeded files
 - Added frontend class service and file service for sending api requests
+- Added class list page with debounced search bar
 
 ## V0.0.8 - Race List 09/11/2026
 
