@@ -26,7 +26,7 @@ func NewServer() *Server {
 
 	fileStore := file_storage.NewLocalStorage("assets/files")
 
-	db, err := database.Init()
+	db, err := database.Init(fileStore)
 	if err != nil {
 		panic(err)
 	}
