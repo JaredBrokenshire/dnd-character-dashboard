@@ -25,4 +25,11 @@ func (s *Seeder) Seed() {
 	s.SetClasses()
 	s.SetClassLogos()
 	s.SetClassCardBackgrounds()
+
+	// Races
+	s.SetTraits()
+	s.SetRaces()
+	s.SetRaceCardBackgrounds()
+	s.SetRaceDetailsImages()
+	s.SetRaceVariants()
 }

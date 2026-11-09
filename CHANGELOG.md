@@ -1,5 +1,9 @@
 ## V0.0.10 - Frontend Race List 09/11/26
 
+### [Added]
+
+- Added seeded races, traits, variants and image assets
+
 ### [Changed]
 
 - Updated race variant model to correctly include race id foreign key
