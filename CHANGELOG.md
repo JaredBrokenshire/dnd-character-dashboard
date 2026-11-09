@@ -1,3 +1,11 @@
+## V0.0.8 - Race List `DATE`
+
+### [Added]
+
+- Added a new `races`, `traits`, `race_traits`, and `race_variants` tables with migrations and corresponding models
+- Added a new race handler with a paginated list endpoint
+- Added a race service and repo
+
 ## V0.0.7 - Class List 08/11/26
 
 ### [Added]

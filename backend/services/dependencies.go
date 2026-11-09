@@ -19,6 +19,7 @@ type Dependencies struct {
 	authService  AuthServiceInterface
 	userService  UserServiceInterface
 	classService ClassServiceInterface
+	raceService  RaceServiceInterface
 }
 
 func NewDependencies(db *gorm.DB, repos *repositories.Repos) *Dependencies {
@@ -79,4 +80,16 @@ func (d *Dependencies) GetClassService() ClassServiceInterface {
 
 func (d *Dependencies) SetClassService(classService ClassServiceInterface) {
 	d.classService = classService
+}
+
+func (d *Dependencies) GetRaceService() RaceServiceInterface {
+	if d.raceService == nil {
+		d.raceService = NewRaceService(d.repos.Race)
+	}
+
+	return d.raceService
+}
+
+func (d *Dependencies) SetRaceService(raceService RaceServiceInterface) {
+	d.raceService = raceService
 }
