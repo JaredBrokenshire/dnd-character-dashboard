@@ -4,6 +4,7 @@
 
 - Added seeded races, traits, variants and image assets
 - Added frontend race service for api requests
+- Added race list page with debounced search bar
 
 ### [Changed]
 
