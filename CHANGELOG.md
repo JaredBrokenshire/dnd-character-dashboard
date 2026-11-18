@@ -3,6 +3,7 @@
 ### [Added]
 
 - Created CHANGELOG with update header formats
+- Created dockerignore
 
 ### [Changed]
 
