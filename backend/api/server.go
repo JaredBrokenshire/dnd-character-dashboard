@@ -2,14 +2,16 @@ package api
 
 import (
 	"dnd/db"
+	"dnd/db/repositories"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"time"
 )
 
 type Server struct {
-	Echo *echo.Echo
-	DB   *gorm.DB
+	Echo  *echo.Echo
+	DB    *gorm.DB
+	Repos *repositories.Repos
 }
 
 func NewServer() *Server {
@@ -24,10 +26,14 @@ func NewServer() *Server {
 		panic(err)
 	}
 
-	return &Server{
+	s := &Server{
 		Echo: echo.New(),
 		DB:   database,
 	}
+
+	s.Repos = repositories.NewRepos(s.DB)
+
+	return s
 }
 
 func (s *Server) Start(address string) error {

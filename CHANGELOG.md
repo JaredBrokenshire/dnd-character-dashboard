@@ -13,6 +13,7 @@
 - Added server router with CORS and middleware configs
 - Added db to server
 - Added server initialisation to entrypoint
+- Created database repositories and added them to server
 
 ### [Changed]
 
