@@ -21,6 +21,7 @@
 - Added PR template
 - Initialised Vue2 frontend with VueX store, VueRouter, TailwindCSS and ESLint
 - Added frontend api service with axios
+- Added base test in tests directory
 
 ### [Changed]
 
