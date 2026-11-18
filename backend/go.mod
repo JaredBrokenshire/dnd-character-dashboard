@@ -3,6 +3,7 @@ module dnd
 go 1.26.5
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/jinzhu/gorm v1.9.16
 	github.com/labstack/echo/v4 v4.16.5
 	github.com/rs/zerolog v1.35.1
