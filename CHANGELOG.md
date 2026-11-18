@@ -14,6 +14,7 @@
 - Added db to server
 - Added server initialisation to entrypoint
 - Created database repositories and added them to server
+- Added expose ports on the host machine for the server and database
 
 ### [Changed]
 
