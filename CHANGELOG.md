@@ -10,6 +10,7 @@
 - Created database init with env variables
 - Added server logging package
 - Added middleware package with logging and JWT Auth config
+- Added server router with CORS and middleware configs
 
 ### [Changed]
 
