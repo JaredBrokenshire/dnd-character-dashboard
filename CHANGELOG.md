@@ -15,6 +15,7 @@
 - Added server initialisation to entrypoint
 - Created database repositories and added them to server
 - Added expose ports on the host machine for the server and database
+- Added docker compose config to start database and api server
 
 ### [Changed]
 
