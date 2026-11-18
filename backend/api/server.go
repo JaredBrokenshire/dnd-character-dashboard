@@ -1,12 +1,15 @@
 package api
 
 import (
+	"dnd/db"
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"time"
 )
 
 type Server struct {
 	Echo *echo.Echo
+	DB   *gorm.DB
 }
 
 func NewServer() *Server {
@@ -16,8 +19,14 @@ func NewServer() *Server {
 	}
 	time.Local = utc
 
+	database, err := db.Init()
+	if err != nil {
+		panic(err)
+	}
+
 	return &Server{
 		Echo: echo.New(),
+		DB:   database,
 	}
 }
 
