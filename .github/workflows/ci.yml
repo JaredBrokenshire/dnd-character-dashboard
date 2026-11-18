@@ -115,6 +115,14 @@ jobs:
         run: npm install
         working-directory: frontend
 
+      - name: Run lint
+        env:
+          # Point at a placeholder API URL for the CI build.
+          # The real value is set at deployment time.
+          VUE_APP_API_BASE_URL: https://api.example.com
+        run: npm run lint
+        working-directory: frontend
+
       - name: Build frontend
         env:
           # Point at a placeholder API URL for the CI build.
