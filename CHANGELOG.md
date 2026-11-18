@@ -8,6 +8,7 @@
 - Created API entrypoint
 - Created echo server
 - Created database init with env variables
+- Added server logging package
 
 ### [Changed]
 
