@@ -18,6 +18,7 @@
 - Added docker compose config to start database and api server
 - Added go-migrations package and added migrations to db
 - Added CI github workflow
+- Added PR template
 
 ### [Changed]
 
