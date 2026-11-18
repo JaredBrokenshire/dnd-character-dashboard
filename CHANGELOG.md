@@ -5,6 +5,7 @@
 - Created CHANGELOG with update header formats
 - Created dockerignore
 - Initialised go.mod file
+- Created API entrypoint
 
 ### [Changed]
 
