@@ -6,6 +6,7 @@
 - Created dockerignore
 - Initialised go.mod file
 - Created API entrypoint
+- Created echo server
 
 ### [Changed]
 
