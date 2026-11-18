@@ -7,6 +7,7 @@
 - Initialised go.mod file
 - Created API entrypoint
 - Created echo server
+- Created database init with env variables
 
 ### [Changed]
 

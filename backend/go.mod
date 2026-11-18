@@ -3,7 +3,12 @@ module dnd
 go 1.26.5
 
 require (
-	github.com/labstack/echo/v4 v4.16.5 // indirect
+	github.com/jinzhu/gorm v1.9.16
+	github.com/labstack/echo/v4 v4.16.5
+)
+
+require (
+	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/labstack/gommon v0.5.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.22 // indirect
