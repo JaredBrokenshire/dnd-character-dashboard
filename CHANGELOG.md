@@ -4,6 +4,10 @@
 
 - Created CHANGELOG with update header formats
 
+### [Changed]
+
+- Updated default gitignore to better reflect tech stack
+
 
 > - **[Added]** — New features, files, endpoints, components, or dependencies introduced in this version
 > - **[Changed]** — Modifications to existing behaviour, UI, configuration, or structure that are not bug fixes
