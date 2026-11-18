@@ -12,6 +12,7 @@
 - Added middleware package with logging and JWT Auth config
 - Added server router with CORS and middleware configs
 - Added db to server
+- Added server initialisation to entrypoint
 
 ### [Changed]
 
