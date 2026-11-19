@@ -5,6 +5,7 @@
 - Created classes table migration
 - Added db paginate function and scopes type
 - Added class handler, service and repo with list endpoint
+- Added class and file factories
 
 ## V0.0.3 - File Storage
 
