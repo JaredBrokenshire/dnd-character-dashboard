@@ -58,21 +58,30 @@ dnd-character-dashboard/
 ├── docker-compose-test.yml             # Test database container only
 │
 ├── backend/
-│   ├── cmd/api/api.go                  # Entry point — loads env, wires server, starts Echo
 │   ├── api/
 │   │   ├── server.go                   # Server struct (Echo + DB + Repos + Services)
+│   │   ├── handlers/                   # API Endpoint handlers
+│   │   ├── requests/                   # Request structs
+│   │   ├── repsonses/                  # Response structs
 │   │   └── routes/                     # Route registration
+│   ├── cmd/api/api.go                  # Entry point — loads env, wires server, starts Echo
+│   ├── config/                         # Configuration settings
 │   ├── db/
 │   │   ├── db.go                       # MySQL connect, run migrations, seed, Paginate() helper
 │   │   ├── migrations/                 # Versioned migration files + registration list
+│   │   ├── models/                     # DB models
 │   │   └── repositories/               # Data-access layer
 │   ├── docker/
 |   |   └── Dockerfile                  # Alpine Go image with CompileDaemon + swag
 │   ├── pkg/
-│   │   ├── middleware/                 # JWT auth middleware, logging middleware
+│   │   ├── closer/                     # Test DB closer
+│   │   ├── go-migrations/              # Vendored go-migrations fork
 │   │   ├── logging/                    # zerolog server logger
-│   │   └── go-migrations/              # Vendored go-migrations fork
+│   │   ├── middleware/                 # JWT auth middleware, logging middleware
+|   |   └── validation/                 # Custom struct validator
 │   └── tests/                          # Table-driven integration tests
+│       ├── helpers/                    # Test helpers (TestServer, TestCase and mock DB connection)
+|       └── mocks/                      # Mock services
 │
 └── frontend/
     ├── .browserslistrc                 # Browser config
@@ -97,6 +106,21 @@ dnd-character-dashboard/
 ```
 
 ---
+
+## API Endpoints
+
+All routes are registered under the root path (`/`). Every protected route requires a `Authorization: Bearer <token>` 
+header.
+
+**Auth**
+
+| Method  | Path             | Description                               |
+|---------|------------------|-------------------------------------------|
+| POST    | `/auth/register` | Create a new user account                 |
+| POST    | `/auth/login`    | Login, returns JWT access + refresh token |
+| POST    | `/auth/refresh`  | Exchange a refresh token for new tokens   |
+| GET     | `/auth/me`       | Get the authenticated user's profile      |
+| POST    | `/auth/logout`   | Logout and invalidate the session         |
 
 ## Running Backend Tests
 
