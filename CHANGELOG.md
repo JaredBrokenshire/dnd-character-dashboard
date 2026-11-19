@@ -9,6 +9,7 @@
 - Added auth request objects
 - Created role and user repositories
 - Created auth and user services, added to dependencies service
+- Created auth handler with register, login, refresh, me and logout endpoints
 
 ## V0.0.1 - Project Initialisation
 
