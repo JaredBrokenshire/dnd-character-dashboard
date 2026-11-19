@@ -16,6 +16,8 @@
 - Added test running methods to base test
 - Added tests for auth endpoints
 - Added database seeder with default roles and users
+- Added auth views (register and login) to frontend
+- Created page header component and image background layout
 
 ## V0.0.1 - Project Initialisation
 
