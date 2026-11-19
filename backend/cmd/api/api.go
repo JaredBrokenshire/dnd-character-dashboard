@@ -4,7 +4,9 @@ import (
 	"dnd/api"
 	"dnd/api/routes"
 	"dnd/pkg/logging"
+	"dnd/pkg/validation"
 	"fmt"
+	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -21,7 +23,9 @@ func main() {
 	_ = godotenv.Load()
 
 	server := api.NewServer()
+	server.Echo.Validator = validation.NewCustomValidator(validator.New())
 	routes.RegisterRoutes(server)
 
-	logging.Logger.LogInfo().Msg(server.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))).Error())
+	// Start Server
+	logging.Logger.LogInfo().Msg(server.Start(fmt.Sprintf(":%v", os.Getenv("PORT"))).Error())
 }
