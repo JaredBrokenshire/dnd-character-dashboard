@@ -12,6 +12,7 @@
 - Created auth handler with register, login, refresh, me and logout endpoints
 - Added system config
 - Created test server and test case helpers with mock db connection
+- Created mock auth service for tests
 
 ## V0.0.1 - Project Initialisation
 
