@@ -21,5 +21,3 @@ func (r *Repository) Delete(object interface{}) error {
 func (r *Repository) Restore(object interface{}) error {
 	return r.DB.Unscoped().Model(object).Update("deleted_at", nil).Error
 }
-
-type Scopes []func(db *gorm.DB) *gorm.DB

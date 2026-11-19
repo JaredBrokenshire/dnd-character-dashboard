@@ -15,6 +15,7 @@
 
 <script>
   import HomeCard from "@/views/home/sections/HomeCard.vue";
+  import ClassesImage from "@/assets/images/pages/home/classes.png"
   import CampaignsImage from "@/assets/images/pages/home/campaigns.png"
   import CharactersImage from "@/assets/images/pages/home/characters.png"
 
@@ -35,6 +36,12 @@
             bodyText: "Collect all of your players in one place, keep track of rolls, and adventure together",
             route: "/campaigns",
             imagePath: CampaignsImage,
+          },
+          {
+            title: "Classes",
+            bodyText: "Choose from a wide range of classes, each provides a character’s most exciting capabilities",
+            route: "/classes",
+            imagePath: ClassesImage,
           },
         ]
       }

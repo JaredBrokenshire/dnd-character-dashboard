@@ -33,9 +33,8 @@ func RegisterRoutes(s *api.Server) {
 		AllowCredentials: true,
 	}))
 
-	// Public Routes
+	// Routes
 	authRoutes(s)
-
-	// Private Routes
 	fileRoutes(s)
+	classRoutes(s)
 }

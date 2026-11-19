@@ -1,3 +1,16 @@
+## V0.0.4 - Class List
+
+### [Added]
+
+- Created classes table migration
+- Added db paginate function and scopes type
+- Added class handler, service and repo with list endpoint
+- Added class and file factories
+- Added seeded classes with logo and car background files
+- Added classes navigation card to home page
+- Added class list view with debounced search bar
+- Added frontend file service to retrieve files from storage
+
 ## V0.0.3 - File Storage
 
 ### [Added]

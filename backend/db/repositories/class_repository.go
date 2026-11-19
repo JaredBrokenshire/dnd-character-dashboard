@@ -1,0 +1,43 @@
+package repositories
+
+import (
+	"dnd/db"
+	"dnd/db/models"
+	"github.com/jinzhu/gorm"
+)
+
+type ClassRepository struct {
+	*Repository
+}
+
+func NewClassRepository(db *gorm.DB) *ClassRepository {
+	return &ClassRepository{
+		Repository: &Repository{DB: db},
+	}
+}
+
+func (r *ClassRepository) GetClasses(page, pageSize int, scopes db.Scopes) ([]*models.Class, int, int) {
+	var classes []*models.Class
+	pageSize, paginateFunc := db.Paginate(page, pageSize)
+
+	r.DB.
+		Preload("Logo").
+		Preload("CardBackground").
+		Scopes(paginateFunc).
+		Scopes(scopes...).
+		Order("name ASC").
+		Find(&classes)
+
+	return classes, page, pageSize
+}
+
+func (r *ClassRepository) Count(scopes db.Scopes) int {
+	var count int64
+
+	r.DB.
+		Model(&models.Class{}).
+		Scopes(scopes...).
+		Count(&count)
+
+	return int(count)
+}

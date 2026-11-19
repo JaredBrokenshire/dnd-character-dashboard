@@ -16,8 +16,9 @@ type Dependencies struct {
 	fileStore file_storage.Store
 
 	// Services
-	authService AuthServiceInterface
-	userService UserServiceInterface
+	authService  AuthServiceInterface
+	userService  UserServiceInterface
+	classService ClassServiceInterface
 }
 
 func NewDependencies(db *gorm.DB, repos *repositories.Repos) *Dependencies {
@@ -66,4 +67,16 @@ func (d *Dependencies) GetUserService() UserServiceInterface {
 
 func (d *Dependencies) SetUserService(userService UserServiceInterface) {
 	d.userService = userService
+}
+
+func (d *Dependencies) GetClassService() ClassServiceInterface {
+	if d.classService == nil {
+		d.classService = NewClassService(d.repos.Class)
+	}
+
+	return d.classService
+}
+
+func (d *Dependencies) SetClassService(classService ClassServiceInterface) {
+	d.classService = classService
 }
