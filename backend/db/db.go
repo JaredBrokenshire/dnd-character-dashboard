@@ -3,6 +3,7 @@ package db
 import (
 	"dnd/db/migrations/process"
 	"dnd/db/seeders"
+	"dnd/pkg/file_storage"
 	"dnd/pkg/go-migrations/store"
 	"dnd/pkg/logging"
 	"fmt"
@@ -13,7 +14,7 @@ import (
 	"os"
 )
 
-func Init() (*gorm.DB, error) {
+func Init(fileStore file_storage.Store) (*gorm.DB, error) {
 	driver := os.Getenv("DB_DRIVER")
 	host := os.Getenv("DB_HOST")
 	port := os.Getenv("DB_PORT")
@@ -36,7 +37,7 @@ func Init() (*gorm.DB, error) {
 	sqlxDB := sqlx.NewDb(db.DB(), driver)
 	runMigrations(sqlxDB, driver, process.List())
 
-	seeder := seeders.NewSeeder(db)
+	seeder := seeders.NewSeeder(db, fileStore)
 	seeder.Seed()
 
 	return db, nil
