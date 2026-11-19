@@ -53,9 +53,13 @@ npm run serve
 
 ```
 dnd-character-dashboard/
+├── .dockerignore
 ├── .env.example                        # Root environment variable template
+├── .gitignore
+├── CHANGELOG.md
 ├── docker-compose.yml                  # Full stack: api + database
 ├── docker-compose-test.yml             # Test database container only
+├── README.md
 │
 ├── backend/
 │   ├── api/
@@ -121,6 +125,12 @@ header.
 | POST    | `/auth/refresh`  | Exchange a refresh token for new tokens   |
 | GET     | `/auth/me`       | Get the authenticated user's profile      |
 | POST    | `/auth/logout`   | Logout and invalidate the session         |
+
+**File**
+
+| Method | Path               | Description                  |
+|--------|--------------------|------------------------------|
+| GET    | `/files/:filepath` | Retrieve a file from storage |
 
 ## Running Backend Tests
 
