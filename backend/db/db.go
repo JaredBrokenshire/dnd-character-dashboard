@@ -2,13 +2,14 @@ package db
 
 import (
 	"dnd/db/migrations/process"
+	"dnd/db/seeders"
 	"dnd/pkg/go-migrations/store"
+	"dnd/pkg/logging"
 	"fmt"
 	"github.com/ShkrutDenis/go-migrations/engine/migrator"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/jmoiron/sqlx"
-	"log"
 	"os"
 )
 
@@ -35,6 +36,9 @@ func Init() (*gorm.DB, error) {
 	sqlxDB := sqlx.NewDb(db.DB(), driver)
 	runMigrations(sqlxDB, driver, process.List())
 
+	seeder := seeders.NewSeeder(db)
+	seeder.Seed()
+
 	return db, nil
 }
 
@@ -48,9 +52,9 @@ func runMigrations(db *sqlx.DB, driver string, migrations []store.Migratable) {
 		if !firstRun && m.MigrationExist(migration.GetName()) {
 			continue
 		}
-		log.Println("Migrating", migration.GetName())
+		logging.Logger.LogInfo().Msg(fmt.Sprintf("Migrating %v", migration.GetName()))
 		migration.Up(db)
 		m.AddMigrationRaw(migration.GetName())
-		log.Println("Migrated", migration.GetName())
+		logging.Logger.LogInfo().Msg(fmt.Sprintf("Migrated %v", migration.GetName()))
 	}
 }

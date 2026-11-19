@@ -32,4 +32,7 @@ func RegisterRoutes(s *api.Server) {
 		},
 		AllowCredentials: true,
 	}))
+
+	// Routes
+	authRoutes(s)
 }

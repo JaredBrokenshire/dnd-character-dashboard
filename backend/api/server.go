@@ -3,15 +3,17 @@ package api
 import (
 	"dnd/db"
 	"dnd/db/repositories"
+	"dnd/services"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
 	"time"
 )
 
 type Server struct {
-	Echo  *echo.Echo
-	DB    *gorm.DB
-	Repos *repositories.Repos
+	Echo         *echo.Echo
+	DB           *gorm.DB
+	Repos        *repositories.Repos
+	Dependencies *services.Dependencies
 }
 
 func NewServer() *Server {
@@ -32,6 +34,7 @@ func NewServer() *Server {
 	}
 
 	s.Repos = repositories.NewRepos(s.DB)
+	s.Dependencies = services.NewDependencies(s.DB, s.Repos)
 
 	return s
 }
