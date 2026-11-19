@@ -1,3 +1,9 @@
+## V0.0.4 - Class List
+
+### [Added]
+
+- Created classes table migration
+
 ## V0.0.3 - File Storage
 
 ### [Added]
