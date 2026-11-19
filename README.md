@@ -132,6 +132,12 @@ header.
 |--------|--------------------|------------------------------|
 | GET    | `/files/:filepath` | Retrieve a file from storage |
 
+**Class**
+
+| Method | Path        | Params                                                                                                                                                         | Description                                     |
+|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| GET    | `/classes`  | - page (Query) = Page number to return (0-indexed)<br/>- page_size (Query) = Number of items to return per page<br/> - search (Query) = Filter classes by name | Get a paginated list of classes ordered by name |
+
 ## Running Backend Tests
 
 Tests use a real MySQL instance (same as the Docker Compose `dnd_mysql` service, or the test DB container).
