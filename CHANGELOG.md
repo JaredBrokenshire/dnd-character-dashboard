@@ -6,6 +6,7 @@
 - Added response wrapper for api endpoints
 - Added custom request validator package
 - Added auth, role and user response objects
+- Added auth request objects
 
 ## V0.0.1 - Project Initialisation
 
