@@ -15,6 +15,7 @@
 - Created mock auth service for tests
 - Added test running methods to base test
 - Added tests for auth endpoints
+- Added database seeder with default roles and users
 
 ## V0.0.1 - Project Initialisation
 
