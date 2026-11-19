@@ -14,6 +14,7 @@
 - Created test server and test case helpers with mock db connection
 - Created mock auth service for tests
 - Added test running methods to base test
+- Added tests for auth endpoints
 
 ## V0.0.1 - Project Initialisation
 
