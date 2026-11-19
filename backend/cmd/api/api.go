@@ -22,6 +22,8 @@ import (
 func main() {
 	_ = godotenv.Load()
 
+	logging.NewServerLogger()
+
 	server := api.NewServer()
 	server.Echo.Validator = validation.NewCustomValidator(validator.New())
 	routes.RegisterRoutes(server)
