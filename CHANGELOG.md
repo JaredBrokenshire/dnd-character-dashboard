@@ -11,6 +11,7 @@
 - Created auth and user services, added to dependencies service
 - Created auth handler with register, login, refresh, me and logout endpoints
 - Added system config
+- Created test server and test case helpers with mock db connection
 
 ## V0.0.1 - Project Initialisation
 
