@@ -3,6 +3,7 @@
 ### [Added]
 
 - Added file storage interface with local storage implementation
+- Added files table with migration and new model
 
 ## V0.0.2 - Auth
 
