@@ -18,6 +18,7 @@
 - Added database seeder with default roles and users
 - Added auth views (register and login) to frontend
 - Created page header component and image background layout
+- Added frontend route protection using auth service and store
 
 ## V0.0.1 - Project Initialisation
 
