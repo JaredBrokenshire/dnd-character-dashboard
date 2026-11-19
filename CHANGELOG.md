@@ -5,6 +5,7 @@
 - Created roles and users DB tables, with user_roles link table
 - Added response wrapper for api endpoints
 - Added custom request validator package
+- Added auth, role and user response objects
 
 ## V0.0.1 - Project Initialisation
 
