@@ -1,3 +1,9 @@
+## V0.0.3 - File Storage
+
+### [Added]
+
+- Added file storage interface with local storage implementation
+
 ## V0.0.2 - Auth
 
 ### [Added]
