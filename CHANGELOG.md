@@ -4,6 +4,7 @@
 
 - Added file storage interface with local storage implementation
 - Added files table with migration and new model
+- Added file handler and get endpoint
 
 ## V0.0.2 - Auth
 
