@@ -8,6 +8,7 @@
 - Added auth, role and user response objects
 - Added auth request objects
 - Created role and user repositories
+- Created auth and user services, added to dependencies service
 
 ## V0.0.1 - Project Initialisation
 
