@@ -3,6 +3,7 @@
 ### [Added]
 
 - Created roles and users DB tables, with user_roles link table
+- Added response wrapper for api endpoints
 
 ## V0.0.1 - Project Initialisation
 
