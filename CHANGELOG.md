@@ -8,6 +8,7 @@
 - Added class and file factories
 - Added seeded classes with logo and car background files
 - Added classes navigation card to home page
+- Added class list view with debounced search bar
 
 ## V0.0.3 - File Storage
 

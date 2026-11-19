@@ -1,8 +1,9 @@
 import Vue from 'vue'
+import store from "@/store";
 import VueRouter from 'vue-router'
 import authRoutes from '@/router/routes/auth';
+import classRoutes from '@/router/routes/class';
 import AuthService from "@/services/auth.service";
-import store from "@/store";
 
 Vue.use(VueRouter)
 
@@ -19,9 +20,10 @@ const router = new VueRouter({
       }
     },
     ...authRoutes,
+    ...classRoutes,
     {
       path: '/404',
-      name: 'error-404-page',
+      name: 'error-404',
       component: () => import('@/views/error/Error404.vue'),
       meta: {
         requiresAuth: true,
