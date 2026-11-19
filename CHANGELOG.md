@@ -1,3 +1,12 @@
+## V0.0.3 - File Storage
+
+### [Added]
+
+- Added file storage interface with local storage implementation
+- Added files table with migration and new model
+- Added file handler and get endpoint
+- Added mock file store for tests
+
 ## V0.0.2 - Auth
 
 ### [Added]

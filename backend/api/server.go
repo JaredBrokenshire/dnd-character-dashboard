@@ -3,6 +3,7 @@ package api
 import (
 	"dnd/db"
 	"dnd/db/repositories"
+	"dnd/pkg/file_storage"
 	"dnd/services"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo/v4"
@@ -23,6 +24,8 @@ func NewServer() *Server {
 	}
 	time.Local = utc
 
+	fileStore := file_storage.NewLocalStorage("assets/files")
+
 	database, err := db.Init()
 	if err != nil {
 		panic(err)
@@ -35,6 +38,7 @@ func NewServer() *Server {
 
 	s.Repos = repositories.NewRepos(s.DB)
 	s.Dependencies = services.NewDependencies(s.DB, s.Repos)
+	s.Dependencies.SetFileStore(fileStore)
 
 	return s
 }
