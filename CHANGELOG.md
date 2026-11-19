@@ -1,3 +1,9 @@
+## V0.0.2 - Auth
+
+### [Added]
+
+- Created roles and users DB tables, with user_roles link table
+
 ## V0.0.1 - Project Initialisation
 
 ### [Added]
