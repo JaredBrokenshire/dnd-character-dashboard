@@ -57,7 +57,7 @@ func NewServerLogger() ServerLogger {
 }
 
 func (l *ServerLogger) LogInfo() *zerolog.Event {
-	logger := l.Logger.With().Caller().Logger()
+	logger := l.Logger.With().Logger()
 	return logger.Info()
 }
 
