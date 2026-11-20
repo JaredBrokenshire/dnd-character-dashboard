@@ -23,5 +23,6 @@ func List() []store.Migratable {
 		&list.UpdateClassesAddProficiencyOptions{},
 		&list.CreateClassArmourProficienciesTable{},
 		&list.CreateSubclassesTable{},
+		&list.UpdateClassesAddDetailsImageId{},
 	}
 }

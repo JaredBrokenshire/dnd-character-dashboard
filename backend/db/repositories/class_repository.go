@@ -53,6 +53,7 @@ func (r *ClassRepository) GetByID(id interface{}) *models.Class {
 		Preload("Subclasses").
 		Preload("Logo").
 		Preload("CardBackground").
+		Preload("DetailsImage").
 		Where("id = ?", id).
 		First(&class)
 

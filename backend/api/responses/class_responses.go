@@ -11,6 +11,8 @@ type ClassResponse struct {
 	ArmourProficiencies        []ClassArmourProficiencyResponse `json:"armour_proficiencies"`
 
 	Subclasses []SubclassResponse `json:"subclasses"`
+
+	DetailsImage FileResponse `json:"details_image"`
 }
 
 func NewClassResponse(class *models.Class) *ClassResponse {
@@ -33,6 +35,10 @@ func NewClassResponse(class *models.Class) *ClassResponse {
 
 	if len(class.Subclasses) > 0 {
 		res.Subclasses = NewSubclassResponses(class.Subclasses)
+	}
+
+	if class.DetailsImage != nil {
+		res.DetailsImage = *NewFileResponse(class.DetailsImage)
 	}
 
 	return res

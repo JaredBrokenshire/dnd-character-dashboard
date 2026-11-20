@@ -188,9 +188,13 @@ func TestClass_Get(t *testing.T) {
 	cardBackground := &models.File{}
 	factories.NewFile(ts.S.DB, cardBackground)
 
+	detailsImage := &models.File{}
+	factories.NewFile(ts.S.DB, detailsImage)
+
 	class := &models.Class{
 		LogoFileID:           logo.ID,
 		CardBackgroundFileID: cardBackground.ID,
+		DetailsImageID:       detailsImage.ID,
 	}
 	factories.NewClass(ts.S.DB, class)
 	class2 := &models.Class{}
@@ -278,6 +282,9 @@ func TestClass_Get(t *testing.T) {
 
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
+
+					fmt.Sprintf(`"location":"%v"`, detailsImage.Location),
+					fmt.Sprintf(`"name":"%v"`, detailsImage.Name),
 
 					fmt.Sprintf(`"tagline":"%v"`, class.Tagline),
 					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),

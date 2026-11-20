@@ -8,6 +8,7 @@
 - Added class skill proficiencies
 - Added class armour proficiencies
 - Added subclasses
+- Added class details page images
 
 ### [Changed]
 
