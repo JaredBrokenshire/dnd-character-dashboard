@@ -5,19 +5,19 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type UpdateClassesAddSkillProficiencyMaxOptions struct{}
+type UpdateClassesAddProficiencyOptions struct{}
 
-func (m *UpdateClassesAddSkillProficiencyMaxOptions) GetName() string {
-	return "UpdateClassesAddSkillProficiencyMaxOptions"
+func (m *UpdateClassesAddProficiencyOptions) GetName() string {
+	return "UpdateClassesAddProficiencyOptions"
 }
 
-func (m *UpdateClassesAddSkillProficiencyMaxOptions) Up(con *sqlx.DB) {
+func (m *UpdateClassesAddProficiencyOptions) Up(con *sqlx.DB) {
 	table := builder.ChangeTable("classes", con)
 	table.Column("skill_proficiency_max_options").Type("INT UNSIGNED").NotNull()
 	table.MustExec()
 }
 
-func (m *UpdateClassesAddSkillProficiencyMaxOptions) Down(con *sqlx.DB) {
+func (m *UpdateClassesAddProficiencyOptions) Down(con *sqlx.DB) {
 	table := builder.ChangeTable("classes", con)
 	table.DropColumn("skill_proficiency_max_options")
 	table.MustExec()

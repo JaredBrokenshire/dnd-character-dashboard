@@ -277,8 +277,8 @@ func TestClass_Get(t *testing.T) {
 
 					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency.WeaponType),
 					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency2.WeaponType),
-					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency.Condition),
-					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency2.Condition),
+					fmt.Sprintf(`"condition":"%v"`, classWeaponProficiency.Condition),
+					fmt.Sprintf(`"condition":"%v"`, classWeaponProficiency2.Condition),
 
 					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency.Skill),
 					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency2.Skill),

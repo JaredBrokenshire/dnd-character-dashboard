@@ -22,8 +22,7 @@ func fillClassWeaponProficiencyDefaults(cwp *models.ClassWeaponProficiency) {
 	if cwp.WeaponType == "" {
 		cwp.WeaponType = types.WeaponTypeSimple
 	}
-	if cwp.Condition == nil {
-		randomString := random.String(16)
-		cwp.Condition = &randomString
+	if cwp.Condition == "" {
+		cwp.Condition = random.String(16)
 	}
 }

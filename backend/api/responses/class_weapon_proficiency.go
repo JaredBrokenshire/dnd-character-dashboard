@@ -11,15 +11,10 @@ type ClassWeaponProficiencyResponse struct {
 }
 
 func NewClassWeaponProficiencyResponse(cwp *models.ClassWeaponProficiency) *ClassWeaponProficiencyResponse {
-	res := &ClassWeaponProficiencyResponse{
+	return &ClassWeaponProficiencyResponse{
 		WeaponType: cwp.WeaponType,
+		Condition:  cwp.Condition,
 	}
-
-	if cwp.Condition != nil {
-		res.Condition = *cwp.Condition
-	}
-
-	return res
 }
 
 func NewClassWeaponProficiencyResponses(cwps []*models.ClassWeaponProficiency) []ClassWeaponProficiencyResponse {
