@@ -48,4 +48,7 @@ func (s *Seeder) Seed() {
 	logging.Logger.LogInfo().Msg("Seeding Class Armour Proficiencies")
 	s.SetClassArmourProficiencies()
 	logging.Logger.LogInfo().Msg("Seeded Class Armour Proficiencies")
+	logging.Logger.LogInfo().Msg("Seeding Subclasses")
+	s.SetClassArmourProficiencies()
+	logging.Logger.LogInfo().Msg("Seeded Subclasses")
 }
