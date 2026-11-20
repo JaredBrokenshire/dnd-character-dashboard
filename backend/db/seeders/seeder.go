@@ -42,4 +42,7 @@ func (s *Seeder) Seed() {
 	logging.Logger.LogInfo().Msg("Seeding Class Weapon Proficiencies")
 	s.SetClassWeaponProficiencies()
 	logging.Logger.LogInfo().Msg("Seeded Class Weapon Proficiencies")
+	logging.Logger.LogInfo().Msg("Seeding Class Skill Proficiencies")
+	s.SetClassSkillProficiencies()
+	logging.Logger.LogInfo().Msg("Seeded Class Skill Proficiencies")
 }
