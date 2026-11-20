@@ -34,4 +34,7 @@ func fillClassDefaults(class *models.Class) {
 	if class.SkillProficiencyMaxOptions == 0 {
 		class.SkillProficiencyMaxOptions = uint(rand.Intn(20))
 	}
+	if class.Description == "" {
+		class.Description = random.String(64)
+	}
 }

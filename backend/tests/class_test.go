@@ -288,6 +288,7 @@ func TestClass_Get(t *testing.T) {
 
 					fmt.Sprintf(`"tagline":"%v"`, class.Tagline),
 					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),
+					fmt.Sprintf(`"description":"%v"`, class.Description),
 					fmt.Sprintf(`"primary_ability":"%v"`, class.PrimaryAbility),
 					fmt.Sprintf(`"hit_point_die_value":%v`, class.HitPointDieValue),
 

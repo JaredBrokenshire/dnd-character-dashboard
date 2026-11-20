@@ -9,6 +9,8 @@ type Class struct {
 	PrimaryAbility   string
 	HitPointDieValue int
 
+	Description string
+
 	SaveProficiencies          []*ClassSaveProficiency
 	SkillProficiencies         []*ClassSkillProficiency
 	SkillProficiencyMaxOptions uint

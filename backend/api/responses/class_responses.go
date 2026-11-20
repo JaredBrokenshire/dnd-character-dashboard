@@ -5,6 +5,8 @@ import "dnd/db/models"
 type ClassResponse struct {
 	*SlimClassResponse
 
+	Description string `json:"description"`
+
 	SkillProficiencies         []ClassSkillProficiencyResponse  `json:"skill_proficiencies"`
 	SkillProficiencyMaxOptions uint                             `json:"skill_proficiency_max_options"`
 	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
@@ -19,6 +21,7 @@ func NewClassResponse(class *models.Class) *ClassResponse {
 	res := &ClassResponse{
 		SlimClassResponse:          NewSlimClassResponse(class),
 		SkillProficiencyMaxOptions: class.SkillProficiencyMaxOptions,
+		Description:                class.Description,
 	}
 
 	if len(class.WeaponProficiencies) > 0 {
