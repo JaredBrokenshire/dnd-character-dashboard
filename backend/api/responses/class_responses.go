@@ -9,6 +9,8 @@ type ClassResponse struct {
 	SkillProficiencyMaxOptions uint                             `json:"skill_proficiency_max_options"`
 	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
 	ArmourProficiencies        []ClassArmourProficiencyResponse `json:"armour_proficiencies"`
+
+	Subclasses []SubclassResponse `json:"subclasses"`
 }
 
 func NewClassResponse(class *models.Class) *ClassResponse {
@@ -27,6 +29,10 @@ func NewClassResponse(class *models.Class) *ClassResponse {
 
 	if len(class.ArmourProficiencies) > 0 {
 		res.ArmourProficiencies = NewClassArmourProficiencyResponses(class.ArmourProficiencies)
+	}
+
+	if len(class.Subclasses) > 0 {
+		res.Subclasses = NewSubclassResponses(class.Subclasses)
 	}
 
 	return res

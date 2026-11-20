@@ -177,6 +177,8 @@ func TestClass_Get(t *testing.T) {
 	ts.ClearTable("class_save_proficiencies")
 	ts.ClearTable("class_weapon_proficiencies")
 	ts.ClearTable("class_skill_proficiencies")
+	ts.ClearTable("class_armour_proficiencies")
+	ts.ClearTable("subclasses")
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
@@ -213,6 +215,11 @@ func TestClass_Get(t *testing.T) {
 	factories.NewClassArmourProficiency(ts.S.DB, classArmourProficiency)
 	classArmourProficiency2 := &models.ClassArmourProficiency{ClassID: class.ID}
 	factories.NewClassArmourProficiency(ts.S.DB, classArmourProficiency2)
+
+	subclass := &models.Subclass{ClassID: class.ID}
+	factories.NewSubclass(ts.S.DB, subclass)
+	subclass2 := &models.Subclass{ClassID: class.ID}
+	factories.NewSubclass(ts.S.DB, subclass2)
 
 	getRequest := func(id interface{}) helpers.Request {
 		return helpers.Request{
@@ -291,6 +298,11 @@ func TestClass_Get(t *testing.T) {
 
 					fmt.Sprintf(`"armour_type":"%v"`, classArmourProficiency.Armour),
 					fmt.Sprintf(`"armour_type":"%v"`, classArmourProficiency2.Armour),
+
+					fmt.Sprintf(`"name":"%v"`, subclass.Name),
+					fmt.Sprintf(`"name":"%v"`, subclass2.Name),
+					fmt.Sprintf(`"description":"%v"`, subclass.Description),
+					fmt.Sprintf(`"description":"%v"`, subclass2.Description),
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, class2.Name),

@@ -7,6 +7,7 @@
 - Added class weapon proficiencies
 - Added class skill proficiencies
 - Added class armour proficiencies
+- Added subclasses
 
 ### [Changed]
 
