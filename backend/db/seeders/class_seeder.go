@@ -15,8 +15,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Artificers use ingenuity and magic to unlock extraordinary capabilities in objects.",
 			PrimaryAbility:   "Intelligence",
 			HitPointDieValue: 8,
-			Save:             models.Constitution,
-			SecondarySave:    models.Intelligence,
 		},
 		{
 			ID:               2,
@@ -25,8 +23,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage.",
 			PrimaryAbility:   "Strength",
 			HitPointDieValue: 12,
-			Save:             models.Strength,
-			SecondarySave:    models.Constitution,
 		},
 		{
 			ID:               3,
@@ -35,8 +31,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Bards are experts at inspiring others, soothing hurts, disheartening foes, and creating illusions.",
 			PrimaryAbility:   "Charisma",
 			HitPointDieValue: 8,
-			Save:             models.Dexterity,
-			SecondarySave:    models.Charisma,
 		},
 		{
 			ID:               4,
@@ -44,8 +38,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Willing to suffer whatever it takes to achieve victory, these adept warriors have forged themselves into a potent force dedicated to protecting the innocent.",
 			PrimaryAbility:   "Strength or Dexterity & Intelligence or Wisdom",
 			HitPointDieValue: 10,
-			Save:             models.Dexterity,
-			SecondarySave:    models.Intelligence,
 		},
 		{
 			ID:               5,
@@ -54,8 +46,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Clerics can reach out to the divine magic of the Outer Planes and channel it to bolster people and battle foes.",
 			PrimaryAbility:   "Wisdom",
 			HitPointDieValue: 8,
-			Save:             models.Wisdom,
-			SecondarySave:    models.Charisma,
 		},
 		{
 			ID:               6,
@@ -64,8 +54,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Druids call on the forces of nature, harnessing magic to heal, transform into animals, and wield elemental destruction.",
 			PrimaryAbility:   "Wisdom",
 			HitPointDieValue: 8,
-			Save:             models.Intelligence,
-			SecondarySave:    models.Wisdom,
 		},
 		{
 			ID:               7,
@@ -74,8 +62,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Fighters all share an unparalleled prowess with weapons and armour and are well acquainted with death, both meting it out and defying it.",
 			PrimaryAbility:   "Strength or Dexterity",
 			HitPointDieValue: 10,
-			Save:             models.Strength,
-			SecondarySave:    models.Constitution,
 		},
 		{
 			ID:               8,
@@ -84,8 +70,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Monks focus their internal reservoirs of power to create extraordinary, even supernatural effects.",
 			PrimaryAbility:   "Dexterity & Wisdom",
 			HitPointDieValue: 8,
-			Save:             models.Strength,
-			SecondarySave:    models.Dexterity,
 		},
 		{
 			ID:               9,
@@ -94,8 +78,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Paladins live on the front lines of the cosmic struggle, united by their oaths against the forces of annihilation.",
 			PrimaryAbility:   "Strength & Charisma",
 			HitPointDieValue: 10,
-			Save:             models.Wisdom,
-			SecondarySave:    models.Charisma,
 		},
 		{
 			ID:               10,
@@ -104,8 +86,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Rangers are honed with deadly focus and harness primal powers to protect the world from the ravages of monsters and tyrants.",
 			PrimaryAbility:   "Dexterity & Wisdom",
 			HitPointDieValue: 10,
-			Save:             models.Strength,
-			SecondarySave:    models.Dexterity,
 		},
 		{
 			ID:               11,
@@ -114,8 +94,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Rogues have a knack for finding the solution to just about any problem, prioritising subtle strikes over brute strength.",
 			PrimaryAbility:   "Dexterity",
 			HitPointDieValue: 8,
-			Save:             models.Dexterity,
-			SecondarySave:    models.Intelligence,
 		},
 		{
 			ID:               12,
@@ -124,8 +102,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Sorcerers harness and channel the raw, roiling power of innate magic that is stamped into their very being.",
 			PrimaryAbility:   "Charisma",
 			HitPointDieValue: 6,
-			Save:             models.Constitution,
-			SecondarySave:    models.Charisma,
 		},
 		{
 			ID:               13,
@@ -134,8 +110,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Warlocks quest for knowledge that lies hidden in the fabric of the multiverse, piecing together arcane secrets to bolster their own power.",
 			PrimaryAbility:   "Charisma",
 			HitPointDieValue: 8,
-			Save:             models.Wisdom,
-			SecondarySave:    models.Charisma,
 		},
 		{
 			ID:               14,
@@ -144,8 +118,6 @@ func (s *Seeder) SetClasses() {
 			CardDescription:  "Wizards cast spells of explosive fire, arcing lightning, subtle deception, and spectacular transformations.",
 			PrimaryAbility:   "Intelligence",
 			HitPointDieValue: 6,
-			Save:             models.Intelligence,
-			SecondarySave:    models.Wisdom,
 		},
 	}
 

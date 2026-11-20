@@ -1,6 +1,7 @@
 package responses
 
 import "dnd/db/models"
+
 type ClassResponse struct {
 	*SlimClassResponse
 
@@ -27,12 +28,11 @@ type SlimClassResponse struct {
 	ID   uint   `json:"id"`
 	Name string `json:"name"`
 
-	Tagline          string         `json:"tagline"`
-	CardDescription  string         `json:"card_description"`
-	PrimaryAbility   string         `json:"primary_ability"`
-	HitPointDieValue int            `json:"hit_point_die_value"`
-	Save             models.Ability `json:"save"`
-	SecondarySave    models.Ability `json:"secondary_save"`
+	Tagline           string                         `json:"tagline"`
+	CardDescription   string                         `json:"card_description"`
+	PrimaryAbility    string                         `json:"primary_ability"`
+	HitPointDieValue  int                            `json:"hit_point_die_value"`
+	SaveProficiencies []ClassSaveProficiencyResponse `json:"save_proficiencies"`
 
 	Logo           FileResponse `json:"logo"`
 	CardBackground FileResponse `json:"card_background"`
@@ -47,8 +47,10 @@ func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
 		CardDescription:  class.CardDescription,
 		PrimaryAbility:   class.PrimaryAbility,
 		HitPointDieValue: class.HitPointDieValue,
-		Save:             class.Save,
-		SecondarySave:    class.SecondarySave,
+	}
+
+	if len(class.SaveProficiencies) > 0 {
+		res.SaveProficiencies = NewClassSaveProficiencyResponses(class.SaveProficiencies)
 	}
 
 	if class.Logo != nil {

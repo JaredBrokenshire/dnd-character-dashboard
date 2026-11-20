@@ -31,10 +31,4 @@ func fillClassDefaults(class *models.Class) {
 	if class.HitPointDieValue == 0 {
 		class.HitPointDieValue = rand.Intn(20)
 	}
-	if class.Save == "" {
-		class.Save = models.Strength
-	}
-	if class.SecondarySave == "" {
-		class.SecondarySave = models.Dexterity
-	}
 }

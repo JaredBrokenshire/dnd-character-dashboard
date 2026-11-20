@@ -21,8 +21,6 @@ func (m *CreateClassesTable) Up(con *sqlx.DB) {
 	table.Column("card_description").Type("TEXT").Nullable()
 	table.String("primary_ability", 255).NotNull()
 	table.Integer("hit_point_die_value").NotNull()
-	table.Column("save").Type("ENUM('Strength','Dexterity','Constitution','Intelligence','Wisdom','Charisma')").NotNull()
-	table.Column("secondary_save").Type("ENUM('Strength','Dexterity','Constitution','Intelligence','Wisdom','Charisma')").Nullable()
 	table.MustExec()
 }
 

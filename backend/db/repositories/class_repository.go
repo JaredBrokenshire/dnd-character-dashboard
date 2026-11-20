@@ -21,6 +21,7 @@ func (r *ClassRepository) GetClasses(page, pageSize int, scopes db.Scopes) ([]*m
 	pageSize, paginateFunc := db.Paginate(page, pageSize)
 
 	r.DB.
+		Preload("SaveProficiencies").
 		Preload("Logo").
 		Preload("CardBackground").
 		Scopes(paginateFunc).
@@ -45,6 +46,7 @@ func (r *ClassRepository) Count(scopes db.Scopes) int {
 func (r *ClassRepository) GetByID(id interface{}) *models.Class {
 	class := &models.Class{}
 	r.DB.
+		Preload("SaveProficiencies").
 		Preload("Logo").
 		Preload("CardBackground").
 		Where("id = ?", id).

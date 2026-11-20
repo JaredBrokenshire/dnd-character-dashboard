@@ -4,6 +4,8 @@ import (
 	"dnd/db/factories"
 	"dnd/db/models"
 	"dnd/tests/helpers"
+	"dnd/tests/mocks"
+	"errors"
 	"fmt"
 	"net/http"
 	"testing"
@@ -11,6 +13,7 @@ import (
 
 func TestClass_List(t *testing.T) {
 	ts.ClearTable("classes")
+	ts.ClearTable("class_save_proficiencies")
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
@@ -30,6 +33,12 @@ func TestClass_List(t *testing.T) {
 	factories.NewClass(ts.S.DB, class2)
 	namedClass := &models.Class{Name: "Test Class"}
 	factories.NewClass(ts.S.DB, namedClass)
+
+	classSaveProficiency := &models.ClassSaveProficiency{ClassID: class.ID}
+	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency)
+
+	classSaveProficiency2 := &models.ClassSaveProficiency{ClassID: class.ID}
+	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency2)
 
 	getRequest := func(query string) helpers.Request {
 		return helpers.Request{
@@ -62,8 +71,9 @@ func TestClass_List(t *testing.T) {
 					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),
 					fmt.Sprintf(`"primary_ability":"%v"`, class.PrimaryAbility),
 					fmt.Sprintf(`"hit_point_die_value":%v`, class.HitPointDieValue),
-					fmt.Sprintf(`"save":"%v"`, class.Save),
-					fmt.Sprintf(`"secondary_save":"%v"`, class.SecondarySave),
+
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency.Ability),
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency2.Ability),
 
 					`"total_count":3`,
 				},
@@ -87,6 +97,9 @@ func TestClass_List(t *testing.T) {
 					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),
 					fmt.Sprintf(`"primary_ability":"%v"`, class.PrimaryAbility),
 					fmt.Sprintf(`"hit_point_die_value":%v`, class.HitPointDieValue),
+
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency.Ability),
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency2.Ability),
 
 					`"total_count":3`,
 				},
@@ -161,6 +174,7 @@ func TestClass_List(t *testing.T) {
 
 func TestClass_Get(t *testing.T) {
 	ts.ClearTable("classes")
+	ts.ClearTable("class_save_proficiencies")
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
@@ -177,6 +191,11 @@ func TestClass_Get(t *testing.T) {
 	factories.NewClass(ts.S.DB, class)
 	class2 := &models.Class{}
 	factories.NewClass(ts.S.DB, class2)
+
+	classSaveProficiency := &models.ClassSaveProficiency{ClassID: class.ID}
+	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency)
+	classSaveProficiency2 := &models.ClassSaveProficiency{ClassID: class.ID}
+	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency2)
 
 	getRequest := func(id interface{}) helpers.Request {
 		return helpers.Request{
@@ -240,6 +259,9 @@ func TestClass_Get(t *testing.T) {
 					fmt.Sprintf(`"card_description":"%v"`, class.CardDescription),
 					fmt.Sprintf(`"primary_ability":"%v"`, class.PrimaryAbility),
 					fmt.Sprintf(`"hit_point_die_value":%v`, class.HitPointDieValue),
+
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency.Ability),
+					fmt.Sprintf(`"save":"%v"`, classSaveProficiency2.Ability),
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, class2.Name),

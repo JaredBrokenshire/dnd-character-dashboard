@@ -3,6 +3,11 @@
 ### [Added]
 
 - Added class get endpoint with id path parameter
+- Added custom types for abilities
+
+### [Changed]
+
+- Moved class save proficiencies into a new table
 
 ## V0.0.4 - Class List
 
