@@ -36,4 +36,7 @@ func (s *Seeder) Seed() {
 	logging.Logger.LogInfo().Msg("Seeding Class Card Backgrounds")
 	s.SetClassCardBackgrounds()
 	logging.Logger.LogInfo().Msg("Seeded Class Card Backgrounds")
+	logging.Logger.LogInfo().Msg("Seeding Class Save Proficiencies")
+	s.SetClassSaveProficiencies()
+	logging.Logger.LogInfo().Msg("Seeded Class Save Proficiencies")
 }
