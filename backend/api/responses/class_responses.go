@@ -1,6 +1,27 @@
 package responses
 
 import "dnd/db/models"
+type ClassResponse struct {
+	*SlimClassResponse
+
+}
+
+func NewClassResponse(class *models.Class) *ClassResponse {
+	res := &ClassResponse{
+		SlimClassResponse:          NewSlimClassResponse(class),
+		SkillProficiencyMaxOptions: class.SkillProficiencyMaxOptions,
+	}
+
+	if len(class.WeaponProficiencies) > 0 {
+		res.WeaponProficiencies = NewClassWeaponProficiencyResponses(class.WeaponProficiencies)
+	}
+
+	if len(class.SkillProficiencies) > 0 {
+		res.SkillProficiencies = NewClassSkillProficiencyResponses(class.SkillProficiencies)
+	}
+
+	return res
+}
 
 type SlimClassResponse struct {
 	ID   uint   `json:"id"`

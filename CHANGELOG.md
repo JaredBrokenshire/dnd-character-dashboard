@@ -1,3 +1,9 @@
+## V0.0.5 - Class Details
+
+### [Added]
+
+- Added class get endpoint with id path parameter
+
 ## V0.0.4 - Class List
 
 ### [Added]

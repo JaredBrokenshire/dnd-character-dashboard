@@ -41,3 +41,14 @@ func (r *ClassRepository) Count(scopes db.Scopes) int {
 
 	return int(count)
 }
+
+func (r *ClassRepository) GetByID(id interface{}) *models.Class {
+	class := &models.Class{}
+	r.DB.
+		Preload("Logo").
+		Preload("CardBackground").
+		Where("id = ?", id).
+		First(&class)
+
+	return class
+}
