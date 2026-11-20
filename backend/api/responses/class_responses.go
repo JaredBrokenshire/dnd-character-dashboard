@@ -6,6 +6,8 @@ type ClassResponse struct {
 	*SlimClassResponse
 
 	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
+	SkillProficiencies         []ClassSkillProficiencyResponse  `json:"skill_proficiencies"`
+	SkillProficiencyMaxOptions uint                             `json:"skill_proficiency_max_options"`
 }
 
 func NewClassResponse(class *models.Class) *ClassResponse {

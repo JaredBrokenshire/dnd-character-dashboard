@@ -19,5 +19,7 @@ func List() []store.Migratable {
 		&list.CreateClassesTable{},
 		&list.CreateClassSaveProficienciesTable{},
 		&list.CreateClassWeaponProficienciesTable{},
+		&list.CreateClassSkillProficienciesTable{},
+		&list.UpdateClassesAddSkillProficiencyMaxOptions{},
 	}
 }

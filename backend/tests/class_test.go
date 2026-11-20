@@ -176,6 +176,7 @@ func TestClass_Get(t *testing.T) {
 	ts.ClearTable("classes")
 	ts.ClearTable("class_save_proficiencies")
 	ts.ClearTable("class_weapon_proficiencies")
+	ts.ClearTable("class_skill_proficiencies")
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
@@ -202,6 +203,11 @@ func TestClass_Get(t *testing.T) {
 	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency)
 	classWeaponProficiency2 := &models.ClassWeaponProficiency{ClassID: class.ID}
 	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency2)
+
+	classSkillProficiency := &models.ClassSkillProficiency{ClassID: class.ID}
+	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency)
+	classSkillProficiency2 := &models.ClassSkillProficiency{ClassID: class.ID}
+	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency2)
 
 	getRequest := func(id interface{}) helpers.Request {
 		return helpers.Request{
@@ -273,6 +279,10 @@ func TestClass_Get(t *testing.T) {
 					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency2.WeaponType),
 					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency.Condition),
 					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency2.Condition),
+
+					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency.Skill),
+					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency2.Skill),
+					fmt.Sprintf(`"skill_proficiency_max_options":%v`, class.SkillProficiencyMaxOptions),
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, class2.Name),

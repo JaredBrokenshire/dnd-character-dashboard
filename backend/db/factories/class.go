@@ -31,4 +31,7 @@ func fillClassDefaults(class *models.Class) {
 	if class.HitPointDieValue == 0 {
 		class.HitPointDieValue = rand.Intn(20)
 	}
+	if class.SkillProficiencyMaxOptions == 0 {
+		class.SkillProficiencyMaxOptions = uint(rand.Intn(20))
+	}
 }

@@ -3,8 +3,9 @@
 ### [Added]
 
 - Added class get endpoint with id path parameter
-- Added custom types for abilities and weapon types
+- Added custom types for abilities, weapon types and skills
 - Added class weapon proficiencies
+- Added class skill proficiencies
 
 ### [Changed]
 

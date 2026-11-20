@@ -11,6 +11,8 @@ type Class struct {
 
 	SaveProficiencies          []*ClassSaveProficiency
 	WeaponProficiencies        []*ClassWeaponProficiency
+	SkillProficiencies         []*ClassSkillProficiency
+	SkillProficiencyMaxOptions uint
 
 	LogoFileID uint
 	Logo       *File `gorm:"foreignkey:LogoFileID"`

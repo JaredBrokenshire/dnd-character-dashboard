@@ -48,6 +48,7 @@ func (r *ClassRepository) GetByID(id interface{}) *models.Class {
 	r.DB.
 		Preload("SaveProficiencies").
 		Preload("WeaponProficiencies").
+		Preload("SkillProficiencies").
 		Preload("Logo").
 		Preload("CardBackground").
 		Where("id = ?", id).
