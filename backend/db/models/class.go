@@ -10,9 +10,10 @@ type Class struct {
 	HitPointDieValue int
 
 	SaveProficiencies          []*ClassSaveProficiency
-	WeaponProficiencies        []*ClassWeaponProficiency
 	SkillProficiencies         []*ClassSkillProficiency
 	SkillProficiencyMaxOptions uint
+	WeaponProficiencies        []*ClassWeaponProficiency
+	ArmourProficiencies        []*ClassArmourProficiency
 
 	LogoFileID uint
 	Logo       *File `gorm:"foreignkey:LogoFileID"`

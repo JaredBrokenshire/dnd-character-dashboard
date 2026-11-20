@@ -6,6 +6,7 @@
 - Added custom types for abilities, weapon types and skills
 - Added class weapon proficiencies
 - Added class skill proficiencies
+- Added class armour proficiencies
 
 ### [Changed]
 

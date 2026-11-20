@@ -5,9 +5,10 @@ import "dnd/db/models"
 type ClassResponse struct {
 	*SlimClassResponse
 
-	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
 	SkillProficiencies         []ClassSkillProficiencyResponse  `json:"skill_proficiencies"`
 	SkillProficiencyMaxOptions uint                             `json:"skill_proficiency_max_options"`
+	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
+	ArmourProficiencies        []ClassArmourProficiencyResponse `json:"armour_proficiencies"`
 }
 
 func NewClassResponse(class *models.Class) *ClassResponse {
@@ -22,6 +23,10 @@ func NewClassResponse(class *models.Class) *ClassResponse {
 
 	if len(class.SkillProficiencies) > 0 {
 		res.SkillProficiencies = NewClassSkillProficiencyResponses(class.SkillProficiencies)
+	}
+
+	if len(class.ArmourProficiencies) > 0 {
+		res.ArmourProficiencies = NewClassArmourProficiencyResponses(class.ArmourProficiencies)
 	}
 
 	return res

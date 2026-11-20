@@ -199,15 +199,20 @@ func TestClass_Get(t *testing.T) {
 	classSaveProficiency2 := &models.ClassSaveProficiency{ClassID: class.ID}
 	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency2)
 
+	classSkillProficiency := &models.ClassSkillProficiency{ClassID: class.ID}
+	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency)
+	classSkillProficiency2 := &models.ClassSkillProficiency{ClassID: class.ID}
+	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency2)
+
 	classWeaponProficiency := &models.ClassWeaponProficiency{ClassID: class.ID}
 	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency)
 	classWeaponProficiency2 := &models.ClassWeaponProficiency{ClassID: class.ID}
 	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency2)
 
-	classSkillProficiency := &models.ClassSkillProficiency{ClassID: class.ID}
-	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency)
-	classSkillProficiency2 := &models.ClassSkillProficiency{ClassID: class.ID}
-	factories.NewClassSkillProficiency(ts.S.DB, classSkillProficiency2)
+	classArmourProficiency := &models.ClassArmourProficiency{ClassID: class.ID}
+	factories.NewClassArmourProficiency(ts.S.DB, classArmourProficiency)
+	classArmourProficiency2 := &models.ClassArmourProficiency{ClassID: class.ID}
+	factories.NewClassArmourProficiency(ts.S.DB, classArmourProficiency2)
 
 	getRequest := func(id interface{}) helpers.Request {
 		return helpers.Request{
@@ -275,14 +280,17 @@ func TestClass_Get(t *testing.T) {
 					fmt.Sprintf(`"save":"%v"`, classSaveProficiency.Ability),
 					fmt.Sprintf(`"save":"%v"`, classSaveProficiency2.Ability),
 
+					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency.Skill),
+					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency2.Skill),
+					fmt.Sprintf(`"skill_proficiency_max_options":%v`, class.SkillProficiencyMaxOptions),
+
 					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency.WeaponType),
 					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency2.WeaponType),
 					fmt.Sprintf(`"condition":"%v"`, classWeaponProficiency.Condition),
 					fmt.Sprintf(`"condition":"%v"`, classWeaponProficiency2.Condition),
 
-					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency.Skill),
-					fmt.Sprintf(`"skill":"%v"`, classSkillProficiency2.Skill),
-					fmt.Sprintf(`"skill_proficiency_max_options":%v`, class.SkillProficiencyMaxOptions),
+					fmt.Sprintf(`"armour_type":"%v"`, classArmourProficiency.Armour),
+					fmt.Sprintf(`"armour_type":"%v"`, classArmourProficiency2.Armour),
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, class2.Name),
