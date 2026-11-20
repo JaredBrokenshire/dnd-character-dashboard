@@ -175,6 +175,7 @@ func TestClass_List(t *testing.T) {
 func TestClass_Get(t *testing.T) {
 	ts.ClearTable("classes")
 	ts.ClearTable("class_save_proficiencies")
+	ts.ClearTable("class_weapon_proficiencies")
 	ts.ClearTable("files")
 	ts.SetupDefaultUsers()
 
@@ -196,6 +197,11 @@ func TestClass_Get(t *testing.T) {
 	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency)
 	classSaveProficiency2 := &models.ClassSaveProficiency{ClassID: class.ID}
 	factories.NewClassSaveProficiency(ts.S.DB, classSaveProficiency2)
+
+	classWeaponProficiency := &models.ClassWeaponProficiency{ClassID: class.ID}
+	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency)
+	classWeaponProficiency2 := &models.ClassWeaponProficiency{ClassID: class.ID}
+	factories.NewClassWeaponProficiency(ts.S.DB, classWeaponProficiency2)
 
 	getRequest := func(id interface{}) helpers.Request {
 		return helpers.Request{
@@ -262,6 +268,11 @@ func TestClass_Get(t *testing.T) {
 
 					fmt.Sprintf(`"save":"%v"`, classSaveProficiency.Ability),
 					fmt.Sprintf(`"save":"%v"`, classSaveProficiency2.Ability),
+
+					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency.WeaponType),
+					fmt.Sprintf(`"weapon_type":"%v"`, classWeaponProficiency2.WeaponType),
+					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency.Condition),
+					fmt.Sprintf(`"condition":"%v"`, *classWeaponProficiency2.Condition),
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, class2.Name),

@@ -5,6 +5,7 @@ import "dnd/db/models"
 type ClassResponse struct {
 	*SlimClassResponse
 
+	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
 }
 
 func NewClassResponse(class *models.Class) *ClassResponse {
