@@ -1,3 +1,21 @@
+## V0.0.5 - Class Details
+
+### [Added]
+
+- Added class get endpoint with id path parameter
+- Added custom types for abilities, weapon types and skills
+- Added class weapon proficiencies
+- Added class skill proficiencies
+- Added class armour proficiencies
+- Added subclasses
+- Added class details page images
+- Added class descriptions
+- Added frontend class view
+
+### [Changed]
+
+- Moved class save proficiencies into a new table
+
 ## V0.0.4 - Class List
 
 ### [Added]

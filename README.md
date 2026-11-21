@@ -83,7 +83,9 @@ dnd-character-dashboard/
 │   │   ├── logging/                    # zerolog server logger
 │   │   ├── middleware/                 # JWT auth middleware, logging middleware
 |   |   └── validation/                 # Custom struct validator
+│   ├── services/                       # Application/Business logic
 │   └── tests/                          # Table-driven integration tests
+│       ├── dependency_tests            # Dependency Tests
 │       ├── helpers/                    # Test helpers (TestServer, TestCase and mock DB connection)
 |       └── mocks/                      # Mock services
 │
@@ -100,9 +102,13 @@ dnd-character-dashboard/
     ├── public/                         # index.html & favicon.ico
     └── src/
         ├── App.vue                     # Entrypoint component
+        ├── global-components.js        # Global components
         ├── main.js                     # Entrypoint JS
+        ├── @core/                      # Core components from external libraries
         ├── assets/                     # CSS and Image assets
         ├── components/                 # Reusable Vue components
+        ├── layouts/                    # Reusable Vue layouts
+        ├── libs/                       # 3rd Party libraries
         ├── router/                     # Vue Router
         ├── services/                   # Axios API client + per-resource service modules
         ├── store/                      # Vuex modules
@@ -134,9 +140,10 @@ header.
 
 **Class**
 
-| Method | Path        | Params                                                                                                                                                         | Description                                     |
-|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| GET    | `/classes`  | - page (Query) = Page number to return (0-indexed)<br/>- page_size (Query) = Number of items to return per page<br/> - search (Query) = Filter classes by name | Get a paginated list of classes ordered by name |
+| Method | Path           | Params                                                                                                                                                         | Description                                     |
+|--------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| GET    | `/classes`     | - page (Query) = Page number to return (0-indexed)<br/>- page_size (Query) = Number of items to return per page<br/> - search (Query) = Filter classes by name | Get a paginated list of classes ordered by name |
+| GET    | `/classes/:id` | - id (Path) = The class ID to return                                                                                                                           | Get a class by its ID                           |
 
 ## Running Backend Tests
 

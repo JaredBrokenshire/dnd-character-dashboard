@@ -17,5 +17,13 @@ func List() []store.Migratable {
 		&list.CreateUserRolesTable{},
 		&list.CreateFilesTable{},
 		&list.CreateClassesTable{},
+		&list.CreateClassSaveProficienciesTable{},
+		&list.CreateClassWeaponProficienciesTable{},
+		&list.CreateClassSkillProficienciesTable{},
+		&list.UpdateClassesAddProficiencyOptions{},
+		&list.CreateClassArmourProficienciesTable{},
+		&list.CreateSubclassesTable{},
+		&list.UpdateClassesAddDetailsImageId{},
+		&list.UpdateClassesAddDescription{},
 	}
 }

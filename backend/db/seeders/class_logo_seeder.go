@@ -68,16 +68,3 @@ func (s *Seeder) SetClassLogos() {
 		}
 	}
 }
-
-// resolveDir returns the first path (trying cwd, then ../cwd, then ../../cwd)
-// where the directory exists, or empty string if none found.
-func resolveDir(path string) string {
-	prefixes := []string{"", "../", "../../"}
-	for _, prefix := range prefixes {
-		candidate := filepath.Join(prefix, path)
-		if _, err := os.Stat(candidate); err == nil {
-			return candidate
-		}
-	}
-	return ""
-}

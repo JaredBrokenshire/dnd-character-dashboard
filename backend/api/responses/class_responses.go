@@ -2,16 +2,60 @@ package responses
 
 import "dnd/db/models"
 
+type ClassResponse struct {
+	*SlimClassResponse
+
+	Description string `json:"description"`
+
+	SkillProficiencies         []ClassSkillProficiencyResponse  `json:"skill_proficiencies"`
+	SkillProficiencyMaxOptions uint                             `json:"skill_proficiency_max_options"`
+	WeaponProficiencies        []ClassWeaponProficiencyResponse `json:"weapon_proficiencies"`
+	ArmourProficiencies        []ClassArmourProficiencyResponse `json:"armour_proficiencies"`
+
+	Subclasses []SubclassResponse `json:"subclasses"`
+
+	DetailsImage FileResponse `json:"details_image"`
+}
+
+func NewClassResponse(class *models.Class) *ClassResponse {
+	res := &ClassResponse{
+		SlimClassResponse:          NewSlimClassResponse(class),
+		SkillProficiencyMaxOptions: class.SkillProficiencyMaxOptions,
+		Description:                class.Description,
+	}
+
+	if len(class.WeaponProficiencies) > 0 {
+		res.WeaponProficiencies = NewClassWeaponProficiencyResponses(class.WeaponProficiencies)
+	}
+
+	if len(class.SkillProficiencies) > 0 {
+		res.SkillProficiencies = NewClassSkillProficiencyResponses(class.SkillProficiencies)
+	}
+
+	if len(class.ArmourProficiencies) > 0 {
+		res.ArmourProficiencies = NewClassArmourProficiencyResponses(class.ArmourProficiencies)
+	}
+
+	if len(class.Subclasses) > 0 {
+		res.Subclasses = NewSubclassResponses(class.Subclasses)
+	}
+
+	if class.DetailsImage != nil {
+		res.DetailsImage = *NewFileResponse(class.DetailsImage)
+	}
+
+	return res
+}
+
 type SlimClassResponse struct {
 	ID   uint   `json:"id"`
 	Name string `json:"name"`
 
-	Tagline          string         `json:"tagline"`
-	CardDescription  string         `json:"card_description"`
-	PrimaryAbility   string         `json:"primary_ability"`
-	HitPointDieValue int            `json:"hit_point_die_value"`
-	Save             models.Ability `json:"save"`
-	SecondarySave    models.Ability `json:"secondary_save"`
+	Tagline           string                         `json:"tagline"`
+	CardDescription   string                         `json:"card_description"`
+	PrimaryAbility    string                         `json:"primary_ability"`
+	HitPointDieValue  int                            `json:"hit_point_die_value"`
+	SaveProficiencies []ClassSaveProficiencyResponse `json:"save_proficiencies"`
 
 	Logo           FileResponse `json:"logo"`
 	CardBackground FileResponse `json:"card_background"`
@@ -26,8 +70,10 @@ func NewSlimClassResponse(class *models.Class) *SlimClassResponse {
 		CardDescription:  class.CardDescription,
 		PrimaryAbility:   class.PrimaryAbility,
 		HitPointDieValue: class.HitPointDieValue,
-		Save:             class.Save,
-		SecondarySave:    class.SecondarySave,
+	}
+
+	if len(class.SaveProficiencies) > 0 {
+		res.SaveProficiencies = NewClassSaveProficiencyResponses(class.SaveProficiencies)
 	}
 
 	if class.Logo != nil {

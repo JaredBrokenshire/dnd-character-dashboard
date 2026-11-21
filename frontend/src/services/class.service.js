@@ -7,6 +7,9 @@ const ClassService =  {
   async list(filters) {
     const queryString = HelperService.buildSearchQueryString(filters)
     return api.get(`${BASE_URL}${queryString}`)
+  },
+  async get(id) {
+    return api.get(`${BASE_URL}/${id}`)
   }
 }
 

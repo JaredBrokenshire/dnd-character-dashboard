@@ -21,6 +21,7 @@ func (r *ClassRepository) GetClasses(page, pageSize int, scopes db.Scopes) ([]*m
 	pageSize, paginateFunc := db.Paginate(page, pageSize)
 
 	r.DB.
+		Preload("SaveProficiencies").
 		Preload("Logo").
 		Preload("CardBackground").
 		Scopes(paginateFunc).
@@ -40,4 +41,21 @@ func (r *ClassRepository) Count(scopes db.Scopes) int {
 		Count(&count)
 
 	return int(count)
+}
+
+func (r *ClassRepository) GetByID(id interface{}) *models.Class {
+	class := &models.Class{}
+	r.DB.
+		Preload("SaveProficiencies").
+		Preload("SkillProficiencies").
+		Preload("WeaponProficiencies").
+		Preload("ArmourProficiencies").
+		Preload("Subclasses").
+		Preload("Logo").
+		Preload("CardBackground").
+		Preload("DetailsImage").
+		Where("id = ?", id).
+		First(&class)
+
+	return class
 }

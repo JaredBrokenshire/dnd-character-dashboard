@@ -113,7 +113,7 @@
             errorText = res.data.error;
           }
 
-          HelperService.errorToast(this.$toast, errorText);
+          HelperService.errorToast(this.$toast, error, errorText);
         } finally {
           this.loading = false;
         }

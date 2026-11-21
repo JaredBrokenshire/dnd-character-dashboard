@@ -23,7 +23,7 @@
 
     computed: {
       backgroundStyle() {
-        return this.backgroundImage
+        return this.$props.backgroundImage
           ? {
             backgroundImage: `url('${this.backgroundImage}')`
           }

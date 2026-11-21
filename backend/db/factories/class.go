@@ -31,10 +31,10 @@ func fillClassDefaults(class *models.Class) {
 	if class.HitPointDieValue == 0 {
 		class.HitPointDieValue = rand.Intn(20)
 	}
-	if class.Save == "" {
-		class.Save = models.Strength
+	if class.SkillProficiencyMaxOptions == 0 {
+		class.SkillProficiencyMaxOptions = uint(rand.Intn(20))
 	}
-	if class.SecondarySave == "" {
-		class.SecondarySave = models.Dexterity
+	if class.Description == "" {
+		class.Description = random.String(64)
 	}
 }

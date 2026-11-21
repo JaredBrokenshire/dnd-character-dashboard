@@ -14,4 +14,5 @@ func classRoutes(s *api.Server) {
 	class.Use(mw.JWTAuth(os.Getenv("JWT_SECRET")))
 
 	class.GET("", classHandler.List)
+	class.GET("/:id", classHandler.Get)
 }
