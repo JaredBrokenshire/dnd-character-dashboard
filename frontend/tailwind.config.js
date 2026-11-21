@@ -28,6 +28,11 @@ module.exports = {
           "light": "#c7654d",
           "dark": "#391b13",
         },
+        "blue": {
+          DEFAULT: "#d7e8ee",
+          "light": "#f1f7f9",
+          "dark": "#b3d3df",
+        }
       }
     }
   },

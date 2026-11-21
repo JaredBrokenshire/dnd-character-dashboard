@@ -10,6 +10,7 @@
 - Added subclasses
 - Added class details page images
 - Added class descriptions
+- Added frontend class view
 
 ### [Changed]
 

@@ -15,7 +15,7 @@
 .transition-all { transition: all .2s ease-in-out; }
 
 pre {
-    @apply whitespace-pre-wrap
+    @apply whitespace-pre-wrap p-0 m-0
 }
 
 /* TEXT STYLES */
@@ -37,7 +37,7 @@ h5 {
 h6 {
     @apply text-xs md:text-sm lg:text-base;
 }
-p {
+p, th, td {
     @apply text-xs md:text-sm lg:text-base
 }
 
@@ -46,4 +46,30 @@ p {
 .validation-provider small {
     @apply absolute;
     bottom: calc(-1.5rem * 1lh)
+}
+
+/* TABLE STYLES */
+table {
+    @apply w-full text-left border border-white border-collapse;
+}
+
+caption {
+    @apply text-left font-bold mb-4
+}
+
+tr {
+    @apply odd:bg-blue even:bg-blue-light transition-all hover:bg-blue-dark;
+}
+
+th {
+    @apply font-bold py-2 px-4
+}
+
+td {
+    @apply max-w-[400px] p-[10px];
+    overflow-wrap: break-word;
+}
+
+td, th {
+    @apply border border-white;
 }

@@ -2,6 +2,7 @@
 <template>
   <component
     :is="layout"
+    id="page-top"
     :background-image="backgroundImage"
   >
     <div class="relative min-h-screen max-w-screen flex flex-col">
