@@ -254,7 +254,6 @@
         try {
           const res = await ClassService.get(this.$route.params.id);
           this.classType = res.data;
-          console.log(this.classType)
         } catch (error) {
           let errorText = "Could not get class, please refresh and try again";
 
