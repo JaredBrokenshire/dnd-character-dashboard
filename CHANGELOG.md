@@ -4,6 +4,7 @@
 - Added traits table with race_traits link table
 - Added new factories for races and traits
 - Added race list view with new frontend service
+- Added race, trait and race card background seeders
 
 ## V0.0.5 - Class Details
 
