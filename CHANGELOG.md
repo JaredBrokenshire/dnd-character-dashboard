@@ -1,5 +1,7 @@
 ## V0.0.6 - Race List
 
+### [Added]
+
 - Added paginated races list endpoint with search filter
 - Added traits table with race_traits link table
 - Added new factories for races and traits
