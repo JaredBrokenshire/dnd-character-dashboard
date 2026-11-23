@@ -2,7 +2,8 @@
 
 - Added paginated races list endpoint with search filter
 - Added traits table with race_traits link table
-- Added new factories for races and raits
+- Added new factories for races and traits
+- Added race list view with new frontend service
 
 ## V0.0.5 - Class Details
 
