@@ -26,5 +26,7 @@ func List() []store.Migratable {
 		&list.UpdateClassesAddDetailsImageId{},
 		&list.UpdateClassesAddDescription{},
 		&list.CreateRacesTable{},
+		&list.CreateTraitsTable{},
+		&list.CreateRaceTraitsTable{},
 	}
 }

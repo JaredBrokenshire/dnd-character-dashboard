@@ -1,6 +1,7 @@
 ## V0.0.6 - Race List
 
 - Added paginated races list endpoint with search filter
+- Added traits table with race_traits link table
 
 ## V0.0.5 - Class Details
 
