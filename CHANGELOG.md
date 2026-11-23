@@ -1,3 +1,7 @@
+## V0.0.6 - Race List
+
+- Added paginated races list endpoint with search filter
+
 ## V0.0.5 - Class Details
 
 ### [Added]
