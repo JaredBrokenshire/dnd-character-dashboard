@@ -103,6 +103,7 @@
           const res = await RaceService.list(this.filters);
 
           this.races = res.data.data || [];
+          console.log(this.races)
           this.filters.page = res.data.meta.page
           this.filters.page_size = res.data.meta.page_size
           this.totalCount = res.data.meta.total_count

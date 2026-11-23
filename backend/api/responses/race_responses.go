@@ -7,8 +7,9 @@ type RaceResponse struct {
 }
 
 type SlimRaceResponse struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
+	ID              uint   `json:"id"`
+	Name            string `json:"name"`
+	CardDescription string `json:"card_description"`
 
 	Traits []TraitResponse `json:"traits"`
 
@@ -17,8 +18,9 @@ type SlimRaceResponse struct {
 
 func NewSlimRaceResponse(race *models.Race) *SlimRaceResponse {
 	res := &SlimRaceResponse{
-		ID:   race.ID,
-		Name: race.Name,
+		ID:              race.ID,
+		Name:            race.Name,
+		CardDescription: race.CardDescription,
 	}
 
 	if len(race.Traits) > 0 {
