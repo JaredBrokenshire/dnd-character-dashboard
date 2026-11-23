@@ -61,6 +61,10 @@ func TestRace_List(t *testing.T) {
 					fmt.Sprintf(`"name":"%v"`, race2.Name),
 					fmt.Sprintf(`"name":"%v"`, namedRace.Name),
 
+					fmt.Sprintf(`"card_description":"%v"`, race.CardDescription),
+					fmt.Sprintf(`"card_description":"%v"`, race2.CardDescription),
+					fmt.Sprintf(`"card_description":"%v"`, namedRace.CardDescription),
+
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 
@@ -80,6 +84,8 @@ func TestRace_List(t *testing.T) {
 				BodyParts: []string{
 					fmt.Sprintf(`"name":"%v"`, race.Name),
 
+					fmt.Sprintf(`"card_description":"%v"`, race.CardDescription),
+
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
 
@@ -91,6 +97,9 @@ func TestRace_List(t *testing.T) {
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, race2.Name),
 					fmt.Sprintf(`"name":"%v"`, namedRace.Name),
+
+					fmt.Sprintf(`"card_description":"%v"`, race2.CardDescription),
+					fmt.Sprintf(`"card_description":"%v"`, namedRace.CardDescription),
 
 					fmt.Sprintf(`"name":"%v"`, trait3.Name),
 				},
@@ -104,6 +113,8 @@ func TestRace_List(t *testing.T) {
 				BodyParts: []string{
 					fmt.Sprintf(`"name":"%v"`, race2.Name),
 
+					fmt.Sprintf(`"card_description":"%v"`, race2.CardDescription),
+
 					fmt.Sprintf(`"name":"%v"`, trait3.Name),
 
 					`"total_count":3`,
@@ -111,6 +122,9 @@ func TestRace_List(t *testing.T) {
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, race.Name),
 					fmt.Sprintf(`"name":"%v"`, namedRace.Name),
+
+					fmt.Sprintf(`"card_description":"%v"`, race.CardDescription),
+					fmt.Sprintf(`"card_description":"%v"`, namedRace.CardDescription),
 
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
@@ -128,11 +142,16 @@ func TestRace_List(t *testing.T) {
 				BodyParts: []string{
 					fmt.Sprintf(`"name":"%v"`, namedRace.Name),
 
+					fmt.Sprintf(`"card_description":"%v"`, namedRace.CardDescription),
+
 					`"total_count":1`,
 				},
 				BodyPartsMissing: []string{
 					fmt.Sprintf(`"name":"%v"`, race.Name),
 					fmt.Sprintf(`"name":"%v"`, race2.Name),
+
+					fmt.Sprintf(`"card_description":"%v"`, race.CardDescription),
+					fmt.Sprintf(`"card_description":"%v"`, race2.CardDescription),
 
 					fmt.Sprintf(`"location":"%v"`, cardBackground.Location),
 					fmt.Sprintf(`"name":"%v"`, cardBackground.Name),
