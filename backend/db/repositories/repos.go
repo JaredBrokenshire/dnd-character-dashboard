@@ -8,6 +8,7 @@ type Repos struct {
 	User  *UserRepository
 	Role  *RoleRepository
 	Class *ClassRepository
+	Race  *RaceRepository
 }
 
 func NewRepos(db *gorm.DB) *Repos {
@@ -17,5 +18,6 @@ func NewRepos(db *gorm.DB) *Repos {
 		User:  NewUserRepository(db),
 		Role:  NewRoleRepository(db),
 		Class: NewClassRepository(db),
+		Race:  NewRaceRepository(db),
 	}
 }

@@ -56,6 +56,18 @@ func (s *Seeder) Seed() {
 	logging.Logger.LogInfo().Msg("Seeding Subclasses")
 	s.SetSubclasses()
 	logging.Logger.LogInfo().Msg("Seeded Subclasses")
+
+	// Races
+	logging.Logger.LogInfo().Msg("Seeding Traits")
+	s.SetTraits()
+	logging.Logger.LogInfo().Msg("Seeded Traits")
+	logging.Logger.LogInfo().Msg("Seeding Races")
+	s.SetRaces()
+	logging.Logger.LogInfo().Msg("Seeded Races")
+	logging.Logger.LogInfo().Msg("Seeding Race Card Backgrounds")
+	s.SetRaceCardBackgrounds()
+	logging.Logger.LogInfo().Msg("Seeded Race Card Backgrounds")
+
 }
 
 // resolveDir returns the first path (trying cwd, then ../cwd, then ../../cwd)
